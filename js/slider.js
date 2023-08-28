@@ -96,6 +96,9 @@ $(document).ready(function () {
         // adding item to the page
         addCarouselItem(e.target.result);
 
+        // clearing input
+        $("#chosenFile").val("");
+
         // used to close modal after selecting file
         setTimeout(function () {
           $("#closeBtn").trigger("click");
@@ -238,6 +241,10 @@ $(document).ready(function () {
     // adding text on slide page
     // this will use addTextOnSlide()
     addTextOnSlide(title, desc);
+
+    // clearing inputs
+    $("#captionTitle").val("");
+    $("#captionDesc").val("");
 
     // after clicking on addTextSubmit, closing its modal
     $("#closeBtnText").trigger("click");
