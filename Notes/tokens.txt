@@ -1,0 +1,30 @@
+-- Java tokens are smallest individual units in the source code
+-- They form the build blocks for java programs
+-- Tokens includes keywords, identifiers, literals, operators, separators and comments
+
+-- Keywords :
+-- these are reserved words in Java & cannot be used as identifiers
+-- ex : class, public, static, if, while, return, void etc.
+
+-- Identifiers :
+-- these are names that are given to variables, methods, classes and other elements
+-- rules for an identifier : must start with a letter (uppercase/lowecase), underscore (_) or dollarSign ($)
+-- Java is case-sensitive : myVar and MyVar both are different
+
+-- Literals :
+-- these are constant values that appear in the code
+-- ex : Integer literal -> 123, Floating-point literal -> 1.3, String literal -> "Jay" etc.
+
+-- Operators :
+-- these are used to perform operations on variables and values
+-- it can be unary, binary, arithmetic etc.
+-- ex : +, -, *, /, %, ?: etc.
+
+-- Separators :
+-- these are characters used to separate parts of the code
+-- ex : ',', ';', '{', '}', '[', ']', '(', ')', '.' etc
+
+-- Comments :
+-- these are not processed by compiler, just for the documentation or explanation
+-- // Single-line comment
+-- /*...*/ Multi-line comment

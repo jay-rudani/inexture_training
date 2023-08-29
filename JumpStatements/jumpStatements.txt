@@ -1,0 +1,21 @@
+-- Jump statements in java are used to control the flow of program execution by transferring control
+   to different parts of the code
+
+-- break statement :
+-- it is used to exit a loop or a switch statement permaturely
+-- when it is encountered within a loop/switch statement, the program flow immediately exits the loop/switch
+-- used to terminate loop early based on a certain condition
+
+-- continue statement :
+-- used to skip the current iteration and move to the next iteration
+-- when it is encountered, the remaining code in the loop for the current iteration is skipped
+-- then loop proceeds with the next iteration
+
+-- return statement :
+-- return is used to exit a method and return a value to the caller
+
+-- labeled break :
+-- labeled break is used to exit from nested loops or switch statements
+-- it allows you to specify which loop/switch you want to break out of when dealing with multiple levels of nested constructs
+-- syntax :
+-- labelName : break;

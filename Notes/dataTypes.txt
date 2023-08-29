@@ -1,0 +1,22 @@
+-- There are 3 types of Data in Java
+-- Primitive, Reference and User-defined
+
+-- Primitive :
+-- these are simply used to represent values
+-- they are not objects and stored directly in memory
+-- 1. byte : 8-bit signed integer, range -128 to 127
+-- 2. short : 16-bit signed integer, range -32768 to 32767
+-- 3. int : 32-bit signed integer, range -2^31 to 2^31-1
+-- 4. long : 64-bit signed integer, range -2^63 to 2^63-1
+-- 5. float : 32-bit floating-point number
+-- 6. double : 64-bit floating-point number
+-- 7. char : 16-bit unicode character
+-- 8. boolean : true or false
+
+-- Reference :
+-- these are used to store references to objects rather than the actual data.
+-- these includes classes, arrays, interfaces etc.
+
+-- User-defined :
+-- you can also create your own user-defined data types using classes and interfaces
+-- These custom data types allow you to model real-world entities with specific attributes and behaviors

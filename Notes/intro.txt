@@ -1,0 +1,23 @@
+-- history:
+-- created by James gosling 1995 at Sun microsystems
+-- now owned by Oracle, more than 3B devices run Java
+-- it is platform independent which means you can run java bytecode (.class file) on any platform
+-- used for mobile apps, desktop apps, web apps, servers, games, databases connections etc.
+
+-- Why Java:
+-- works on different platforms
+-- simple and open source
+-- secure, fast and powerful
+-- its an OOP language for clear programming structure and better code reusability etc.
+
+-- JDK, JRE and JVM:
+-- JDK : its development kit holds development tools (javac, java) for developing Java apps that also contains JRE and JVM
+-- JRE : its a runtime environment that holds set of libraries (jars etc) and provides environment for JVM
+         NOTE : JRE is must to have in the system to run any java program or app
+                JVM is the part of JRE
+-- JVM : its virtual machine that converts bytecode into machine code and it loads code, verifies code, executes code
+
+-- to compile Java program using command:
+-- $ javac name_of_file.java
+-- to run Java program using command:
+-- $ java name_of_class

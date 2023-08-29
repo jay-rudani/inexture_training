@@ -1,0 +1,28 @@
+-- Loop allow you to execute a block of code repeatedly
+
+-- for loop :
+-- use 'for' loop when you know the no. of iterations beforehand or
+-- when you need to iterate over a range of values a specific no. of times
+-- for(initialization; condition; increment/decrement) {
+--      // code
+-- };
+
+-- while loop :
+-- use when you want to repeatedly execute block of code as long as a certain condition is true
+-- useful when exact no. of iterations is unknown or can vary
+-- ensure that the loop condition can become false, otherwise you might end up in an infinite loop
+-- while(condition) {
+--      // code
+-- }
+
+-- do-while loop :
+-- use when you want to ensure that the loop body body is executed at least once, regardless of whether 
+   the condition is initially true or false
+-- do {
+--    // code
+-- } while(condition);
+
+-- for-each loop :
+-- useful when want to iterate over all the elements in a DS without worrying about the index
+   or explicit bounds checking
+-- this for loop is only available for iterating over arrays and objects who implements Iterable interface

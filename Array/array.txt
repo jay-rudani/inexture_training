@@ -1,0 +1,18 @@
+-- Array in java is a data structure that is used to store multiple values of the same type in a single variable
+-- each array element is accessed by its index starts from 0
+
+-- syntax
+-- dataType[] arrayName = new dataType[size];
+-- ex : int[] numbers = new int[5];
+-- initialize with values : int[] numbers = {1,2,3,4,5};
+-- access : int firstNum = numbers[0];
+-- length : int arrayLength = array.length;
+
+-- multidimensional array :
+-- Java also supports multi-dimensional arrays, which are arrays of arrays
+
+-- jagged array :
+-- it is an array whose elements are also arrays
+-- however, unlike regular multidimensional array where all the subarrays have the same length,
+-- in a jagged array, the subarrays can have different lengths
+-- this allows you to create a matrix where each row can have different no. of elements

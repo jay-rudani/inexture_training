@@ -1,0 +1,20 @@
+-- Strings in java represents sequence of characters
+-- it is used to store and manipulate textual data
+-- strings are immutable in java
+-- string can be created in 3 ways:
+-- String str = "Hello"; -> this is called String literal
+-- String str = new String("Hello"); -> this called string object
+-- String str = new String(arrayOfChars);
+
+-- String pool:
+-- its a special memory area where string literals are stored
+-- aims to optimize memory usage and improve performance while working with strings
+-- ex : str1="hello"; str2="hello";
+-- here java only creates one copy of "hello" and stores it in string constant pool
+-- which means both str1 and str2 points to the same value in string pool
+-- this concept is also referred as "string interning" which involves
+   adding strings to pool if it doesn't exists, and returning a reference to the existing string if it does
+
+-- Immutable :
+-- for Thread safety, security, hashing, caching and performance, pool and memory optimization, predictable behavior
+   , method params and return values etc.

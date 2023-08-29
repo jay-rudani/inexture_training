@@ -1,0 +1,19 @@
+-- Methods in Java are blocks of code that perform certain task or action
+
+-- Static Methods :
+-- these are also known as class methods, and associated with class only rather than with instances of class
+-- they are declared using 'static' keyword
+-- it can be called directly without creating instances
+-- they can only directly access static members of the class
+-- they can't use instance variables or call non-static methods without creating an instance of the class
+-- they are commonly used for utility functions, helper methods etc.
+
+-- Non-static Methods :
+-- these are associated with instances of class so an instance should be created before using them
+-- they are declared without 'static' keyword
+-- they can access both static (using class name) and instance members of the class
+
+-- Method Chaining :
+-- it is a technique that allows you to call multiple methods on the same object in a single line of code
+-- this can lead to more concise and readable code
+-- ex : object.setFirstname("JAY").setLastname("RUDANI");

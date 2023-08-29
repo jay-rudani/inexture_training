@@ -1,0 +1,14 @@
+-- Local Variables :
+-- these are declared within a method, constructor or block
+-- And are only accessible within that specific scope
+-- they must be initialized before used
+
+-- Instance Variables :
+-- these are declared within the class but outside any method or block
+-- each instance of the class has its own copy for instance variables
+-- if they are not initialized then default value will be taken
+
+-- Static Variables :
+-- these are declared with 'static' modifier within a class
+-- they belong to class, not to objects
+-- these are shared among all the objects
