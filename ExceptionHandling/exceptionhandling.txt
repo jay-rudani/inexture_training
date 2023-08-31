@@ -1,0 +1,41 @@
+-- Exception handling in Java is a powerful mechanism to handle runtime exception to prevent abnormal termination
+   of the program
+-- errors are different from exception, an error is irrecoverable
+
+-- Throwable is the root class of exceptions and errors
+-- exceptions -> IOException, SQLException, ClassNotFoundException, RuntimeException
+   RuntimeException -> ArithmeticException, NullPointerException, NumberFormatException, IndexOutOfBoundsException
+                       IndexOutOfBoundsException -> ArrayIndexOutOfBoundsException, StringIndexOutOfBoundsException
+-- errors -> StackOverflowError, VirtualMachineError, OutOfMemoryError
+
+-- there are two types of exceptions :
+
+-- Checked Exception (compile-time) :
+-- these are exceptions that the java requires you to handle it explicitly
+-- this means a method throws a Checked exception, you must either catch it using try-catch block
+   or declare that your method may throw this exception using throws keyword in its method signature.
+-- the classes that directly inherit the Throwable class except RuntimeException and Error are known as checked exceptions
+-- ex : IOException, SQLException etc.
+
+-- Unchecked Exception (run-time) :
+-- The classes that inherit the RuntimeException are known as unchecked exceptions
+-- For example, ArithmeticException, NullPointerException, ArrayIndexOutOfBoundsException, etc
+-- Unchecked exceptions are not checked at compile-time, but they are checked at runtime
+
+-- try block :
+-- in which we should write a code that might cause an exception
+-- it can't be used alone, it must be followed either by catch or by finally
+
+-- catch block :
+-- it is used to handle exception
+-- it must be preceeded by try block
+
+-- finally block :
+-- it is used to execute necessary code of the program
+-- this block will be executed whether an exception is occurred/handled or not
+
+-- throw keyword used to throw an exception
+-- throws keyword is used to declare exceptions, that there may occur an exception in the method
+   it does not throw an exception, always used with method signature.
+
+-- in multi-catch block, exception should be defined from most specific to general
