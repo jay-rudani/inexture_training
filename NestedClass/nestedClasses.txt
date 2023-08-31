@@ -1,0 +1,19 @@
+-- In java, a nested class is defined within another class
+
+-- Static nested class :
+-- it is not tied to an instance of the outerclass and can be accessed using the outerclass name
+-- it cannot access non-static members of the outerclass directly
+
+-- Inner class :
+-- this is non-static and can access both static and non-static members of the outerclass
+-- an instance of the innerclass is tied to an instance of the outerclass
+
+-- Local inner class :
+-- this class is defined within a method or a block of code
+-- it has access to the final members of the method or block it's defined in
+-- it cannot have any access modifiers except 'final' and 'abstract'
+
+-- Anonymous inner class :
+-- these are defined without class name and are usually used for one-time use, such as implementing interface
+   or extending classes.
+-- they are often used in event handling and GUI programming
