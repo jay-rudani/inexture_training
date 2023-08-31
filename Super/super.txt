@@ -1,0 +1,7 @@
+-- super as a keyword :
+-- super keyword is used to refer superclass or parent class of the current class
+-- it is often used to access members of the superclass when they are overridden or hidden by the subclass
+
+-- super as a constructor invocation :
+-- in a subclass constructor, you can use the super keyword to explicitly call a constructor from the superclass
+-- this is used when you want to perform some initialization that is common to both the subclass and the superclass

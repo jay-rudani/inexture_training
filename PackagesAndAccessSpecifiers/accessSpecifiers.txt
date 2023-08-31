@@ -1,0 +1,8 @@
+-- Access specifiers in java are keywords used to control visibility and accessibility of classes, methods,
+   fields and other members in the class
+
+-- public : members are accessibile from any other class, there are no restrictions
+-- protected : members are accessibile from same package and also in subclasses (including outside packages)
+-- private : members are accessibile within the same class only
+-- default : if no specifier is provided then member is considered to have default or package-private access
+             means accessibile within the same package.

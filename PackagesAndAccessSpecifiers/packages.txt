@@ -1,0 +1,6 @@
+-- In java, packages are way to organize and group related class, interface and subpackages together
+-- it helps in managing and organizing the codebase of the java app by providing a heirarchical structure
+-- they are used to avoid name conflits, improve code maintainability and provide a clear structure
+
+-- ex : com.myapp.dao.user
+-- com.myapp.service <- com.myapp.service.impl

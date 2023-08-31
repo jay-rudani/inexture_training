@@ -1,0 +1,17 @@
+-- Object-oriented programming is a programming paradigm or methodology that is centered around the concept of "objects"
+
+-- Encapsulation :
+-- refers to the concept of binding together the method and data that operate on the data into a single unit
+-- in java, Encapsulation is achieved by declaring the instance variables as private and providing public
+   methods (getters and setters) to access and modify those variables.
+-- this ensures that data variables are accessed through controlled methods
+-- this is also known as data hiding
+-- this is also used for security reasons where sensitive data can be kept private, preventing unauthorized access and modification
+
+-- Inheritance :
+-- it is a concept that allows a class to inherit properties and behaviors from another class
+-- types : single level, multilevel, multiple (through interface), hierarchical
+
+-- Abstraction :
+-- It is the concept of creating abstract data types, hide implementation, and expose only the necessary info
+   outside the world.

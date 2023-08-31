@@ -1,0 +1,17 @@
+-- Java interface defines a contract set of methods that a class must implement
+-- It allows you to establish a common interface that multiple classes can adhere to,
+   promoting a consistent behavior across different implementations.
+
+-- Properties :
+-- an interface can only have method declarations, no method body
+-- multiple inheritance is achieved using interface
+-- provides abstraction
+-- from Java 8, interface can have default and static methods
+-- default methods provide a default implementation that implementing classes can use or override
+-- static methods are only associated with interface itself, not the implementing classes
+
+-- Limitations :
+-- no constructor
+-- no instance variables
+-- no method bodies
+-- less code-reusability etc

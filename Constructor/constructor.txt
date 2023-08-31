@@ -1,0 +1,21 @@
+-- Constructors in java are special methods used to initialize objects when they are created
+-- it plays a crucial role in initializing the instance variables of a class and preparing an object for use
+
+-- Types :
+-- Default Constructor :
+-- if a class does not have any explicitly defined constructors, Java automatically provides a default
+   constructor with no params. This constructor initializes instance variables with default values.
+
+-- Parameterized Constructor :
+-- these constructors accept params when objects are created
+   they allow you to initialize instance variables with specific values provided during object creation
+
+-- Copy Constructor :
+-- A copy constructor creates a new object by copying the values from another object of the same class
+
+-- Chained Constructor :
+-- constructor can call another constructors of the same class using 'this' keyword
+
+-- Private Constructor :
+-- these are used to prevent the class instantiation from outside the class itself
+-- this serves as a utility class and should not be instantiated 

@@ -1,0 +1,10 @@
+-- in Java, 'this' is a reference variable that refers to the current object, or can be said
+   'this' in java is a keyword that refers to the current object instance
+
+-- Use of 'this' :
+-- refer to current class instance variables
+-- to invoke the current class constructor
+-- to return the current class instance
+-- as a method parameter
+-- to invoke the current class method
+-- as an argument in the constructor call

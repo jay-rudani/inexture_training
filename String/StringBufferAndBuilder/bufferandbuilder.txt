@@ -1,0 +1,5 @@
+-- StringBuffer is a class that provides mutable sequence of characters
+-- similar to String class but differs in that it allows you to modify the contents of the string without
+   creating new object each time.
+-- StringBuffer is the part of java.lang package and is considered as thread-safe, meaning
+   it can be safely used in a multithreaded environment without running into sync issues

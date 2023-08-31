@@ -1,0 +1,12 @@
+-- Abstract class allows you to create both concrete and abstract methods
+-- Abstract classes cannot be instantiated on their own but serve as a blueprint for other classes to inherit from
+
+-- Properties :
+-- abstract class contains abstract methods (without body) that should be overridden by a class who extending it
+-- also contains concrete methods as well with method body
+-- they can have instance variables just like regular classes
+-- these variables can hold data that is common to all subclasses
+-- abstract classes can have constructors used to initialize the state of objects when they are created,
+   subclasses typically call this constructors using super keyword
+-- Abstract classes facilitate polymorphism, allowing you to treat objects of different subclasses as instances of the abstract class
+   This can be useful for creating more generalized code
