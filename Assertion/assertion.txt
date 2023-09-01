@@ -1,0 +1,28 @@
+-- An assertion allows testing the correctness of any assumptions that have been made in the program
+-- it is achieved using the assert statement in java
+-- while executing assertion, it is believed to be true, if it fails, JVM throws an error named AssertionError
+-- it is mainly used for testing purposes
+
+-- The assert statement is used with boolean expression can be written in 2 different ways :
+-- First way :
+   assert : expression;
+-- Second way :
+   assert expression1 : expression2;
+
+-- To enable assertion :
+   java -ea TestClass
+-- To disable assertion :
+   java -da TestClass
+
+-- Why to use :
+-- whenever a programmer wants to see if their assumptions are wrong or not
+-- to make sure that an unreachable-code is actually unreachable
+-- to make sure that assumptions written in comments are right
+-- to make sure that the default switch case is not reached
+-- to check object's state
+
+-- Where to use :
+-- arguments to private methods.
+   Private arguments are provided by the developer’s code only and the developer may want to check his/her assumptions about arguments
+-- Conditional cases
+-- Conditions at the begining of the any method
