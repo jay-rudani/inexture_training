@@ -1,0 +1,31 @@
+-- A wrapper class in java whose object wraps or contains primitive data types
+-- when we create an object to a wrapper class, it contains a field and in this field,
+   we can store primitive data types.
+   i.e. we can wrap a primitive value into a wrapper class
+
+-- Need for wrapper classes :
+-- converts primitive data into objects
+-- objects are needed if we wish to modify the arguments passed into method
+-- DS in collection framework such as ArrayList, Vector stores only objects and not primitive data types
+-- An object is needed to support synchronization in multithreading
+-- Object data allowed null values
+
+-- Primitive data types and their corresponding Wrapper class :
+1) char -> Character
+2) int -> Integer
+3) double -> Double
+4) float -> Float
+5) short -> Short
+6) boolean -> Boolean
+7) long -> Long
+8) byte -> Byte
+
+-- Autoboxing :
+-- it is the automatic conversion of primitive data types to the object os their corresponding wrapper classes
+   is known as Autoboxing.
+   ex : int to Integer, char to Character etc.
+
+-- Unboxing :
+-- it is just the reverse process of Autoboxing
+-- automatically converting an object of wrapper class to its corresponding primitive type is known as Unboxing
+   ex : Integer to int, Character to char etc.
