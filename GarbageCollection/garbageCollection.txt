@@ -1,0 +1,30 @@
+-- in java, Garbage means unreferenced objects
+-- Garbage collection is process of reclaiming the runtime unused memory automatically
+-- i.e. it is way to destory unused objects
+
+-- Advantages :
+-- it makes java memory efficient because Garbage collector removes the unreferenced objects from heap memory
+-- It is automatically done by the garbage collector(a part of JVM) so we don't need to make extra efforts
+
+-- How can an object be unreferenced?
+-- by nulling the reference :
+   Employee e = new Employee();
+   e=null;
+-- by assigning a reference to another :
+   Employee e1 = new Employee();
+   Employee e2 = new Employee();
+   e1=e2; // now the first object referred by e1 is available for GC
+-- anonymous object :
+   new Employee();
+
+-- the GC of JVM collects only those objects that are created by new keyword
+-- so if you have created objects without new, you can use finalize() method to perform cleanup
+-- GC is performed by a daemon thread called Garbage collector. this thread calls the finalize() method before object is garbage collected
+
+-- finalize() :
+-- The finalize() method is invoked each time before the object is garbage collected
+-- This method can be used to perform cleanup processing
+
+-- gc() :
+-- The gc() method is used to invoke the garbage collector to perform cleanup processing
+-- The gc() is found in System and Runtime classes
