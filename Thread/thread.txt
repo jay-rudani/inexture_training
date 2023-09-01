@@ -1,0 +1,52 @@
+-- A java Thread is a lightweight sub-process that enables concurrent execution of code
+-- Threads are used to perform multiple tasks simultaneously, making it possible to achieve
+   better performance and responsiveness in applications
+-- Each java program at least has one main thread, but you create additional threads to perform tasks in parallel
+
+-- Lifecycle :
+1) NEW STATE : 
+-- when a thread is created but has not yet started, its in "NEW" state
+-- this typically occurs when you create a new instance of Thread class or when a thread is spwaned by another thread
+2) RUNNABLE STATE :
+-- once a thread is started using the start() method, it enters in the "RUNNABLE" state
+-- in this state, thread is eligible to run, but the actual execution time is determined by the OS's thread scheduler
+3) BLOCKED/WAITING STATE :
+-- a thread can transition to "BLOCKED" or "WAITING" state when it is temporarily paused, typically due to some condition or event
+-- ex : a thread might block while waiting for i/o ops or a specific resource
+-- it can also be explicitly put into a "WAITING" state using methods like wait(), sleep() or by invoking join() on another thread
+4) TIMED WAITING STATE :
+-- this is a special variation of the "WAITING" state, where a thread is set to wait for a specific amount of time
+   using methods like sleep(3000) or wait(3000).
+5) TERMINATED/DEAD STATE :
+-- it enters in "TERMINATED" or "DEAD" state when its execution is completed
+-- this can happen naturally when the run() method of the thread completes or can be forced by calling interrupt()
+   to terminate a running thread.
+
+-- Thread.sleep(ms) :
+-- this method is used to halt the working of a thread for a given amount of time
+-- the time up to which the thread remains in the sleeping state is known as the sleeping time of the thread
+-- after sleeping time is over, the thread starts its execution from where it has left
+
+-- Thread Priority :
+-- each thread has a priority
+-- priorities are represented by number between 1 to 10
+-- in most cases thread scheduler schedules the thread according to their priority
+-- but it is not gauranteed because it depends on JVM specification that which scheduling it chooses
+-- Thread.getPriority() returns the priority of the given thread
+-- Thread.setPriority() updates/assign the priority of the thread to newPriority
+   it throws IllegalArgumentException if the value of priority goes out of range
+-- 3 constants are available in Thread class to set priority :
+1) MIN_PRIORITY : 1
+2) NORM_PRIORITY : 5 (default)
+3) MAX_PRIORITY : 10
+
+-- Thread.join() :
+-- when the join method is invoked, the current thread stops its execution and the thread goes into the wait state
+-- the current thread remains in the wait state until the thread on which the join() method is invoked has achieved its dead state
+-- if the interruption of the thread occurs, then it throws InterruptedException
+
+-- Thread.yield() :
+-- when a thread calls the yield() method, it suggests to JVM that it is willing to pause its execution and allow
+   other threads of equal priority to run.
+-- however, its important to note that calling yield() does not gaurantee that the thread will immediately yield
+   the CPU to other threads
