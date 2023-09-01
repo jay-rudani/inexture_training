@@ -1,0 +1,7 @@
+-- Scanner class in java is the part of the java.util package and is used to read input from various sources
+   such as the keyboard, files and streams.
+-- it provides methods to parse and tokenize input data into various data types like integers, doubles, strings and more
+-- to use Scanner, import java.util.Scanner;
+-- By default Scanner uses whitespace as the delimeter to separate tokens, however you can change the
+   delimeter using scanner.useDelimeter(",");
+-- it is important to close Scanner when you are done using it, releases resources associated with it.
