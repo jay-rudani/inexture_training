@@ -1,0 +1,18 @@
+-- List is an interface that extends collection interface
+-- A list is used to store ordered collection of data and it may contain duplicates
+-- the elements present, can be accessed or inserted by their position in the list using zero-based indexing
+-- the list implemented by LinkedList, ArrayList, Vectors and Stack classes
+
+-- ArrayList :
+-- it is similar to arrays
+-- they are also called dynamic arrays means it does not have fixed size
+-- its size can be increased or decreased if elements are added or removed
+
+-- LinkedList :
+-- it extends AbstractSequentialList and also extends the List, Deque, Queue interface
+-- it is a linear data structure where the elements are called as nodes
+-- each node has 2 fields, data and next
+-- elements are not stored in contiguous memory, so direct access to that element is not possible
+-- LinkedList uses DoublyLinkedList to store its elements while ArrayList internally uses a dynamic array
+   to store its elements
+-- LinkedList is faster in the manipulation of the data

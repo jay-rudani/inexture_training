@@ -1,0 +1,5 @@
+-- Vector :
+-- it is used to implement dynamic arrays
+-- similar to ArrayList but has some differences, primarily related to synchronization
+-- Vector methods are thread-safe
+-- suitable for multi-threaded applications where multiple threads may access or modify the Vector simultaneously

@@ -1,0 +1,20 @@
+-- a map is an object that stores key and value pairs
+-- it contains unique keys as the same key cannot have multiple mappings
+-- Map is a part of Collections framework, is not actual Collections because they do not implement the Collection interface
+
+-- HashMap :
+-- it extends AbstractMap and implements the Map interface
+-- it used hash table for storing key-value pairs
+-- no duplicate keys
+-- allows one null key and multiple null values
+-- unordered
+
+-- LinkedHashMap :
+-- no duplicate keys
+-- allows one null key and multiple null values
+-- ordered
+
+-- TreeMap :
+-- sorted order
+-- no duplicate keys
+-- no null key but multiple null values

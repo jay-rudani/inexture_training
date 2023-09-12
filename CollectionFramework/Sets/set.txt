@@ -1,0 +1,17 @@
+-- It is a part of java.util package
+-- It represents a collection of elements where each element is unique, meaning that no two elements can be equal with the same Set
+-- It does not allow duplicates and does not guarantee any specific order of elements
+-- It does not allow null elements except HashSet which allows only one null element
+
+-- HashSet :
+-- this implementation uses a hash table to store elements
+-- it offers constant-time average complexity for basic ops like add, remove, contains
+-- does not guarantee specific order of elements
+
+-- LinkedHashSet :
+-- it maintains a doubly-linkedlist in addition to hash table, which allows it to maintain the order of insertion
+
+-- TreeSet :
+-- elements in a TreeSet are stored in a sorted order
+-- it uses red-black tree to maintain this order
+-- elements must be comparable or provided with a custom 'Comparator'

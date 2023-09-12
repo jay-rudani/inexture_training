@@ -1,0 +1,10 @@
+-- Comparable:
+-- Comparable is an interface that is used to define the natural ordering of objects of a class
+-- This means that if a class implements the Comparable interface, it defines how its objects should be compared with each other
+-- The Comparable interface has a single method called compareTo(), which is used to compare two objects of the same class
+-- Objects that implement Comparable can be sorted using methods like Collections.sort() for lists or Arrays.sort() for arrays
+
+-- Comparator:
+-- Comparator is an interface that is used to define custom comparison logic for objects when you don't have control over the class's source code or when you want to provide multiple ways to compare objects
+-- With Comparator, you can create separate classes or inline implementations of the interface to define different comparison criteria
+-- Comparator has a single method called compare(), which takes two objects and returns an integer value to indicate their relative order
