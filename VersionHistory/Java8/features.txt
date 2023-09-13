@@ -1,0 +1,66 @@
+-- Lambda Exps :
+-- it help us to write our code in functional style
+-- it provides a clear and concise way to implement SAM interface(Single Abstract Method) by using an expression
+-- it is very useful in collection library in which it helps to iterate, filter and extract data
+--- why to use :
+ -- to provide implementation of functional interface
+ -- less coding
+--- syntax :
+ -- (args-list) -> {body};
+ -- agrs-list can be empty or non-empty
+ -- arrow token is used to link args-list and body of the expression
+ -- body contains expressions and statements for lambda expression
+ -- ex : ()->{}; (p1)->{}; (p1,p2)->{};
+
+-- Method Reference :
+-- is used to refer method of functional interface
+-- It is compact and easy form of lambda expression
+-- Each time when you are using lambda expression to just referring a method, you can replace your lambda expression with method reference
+-- types of method reference :
+   1) reference to a static method -> ContainingClass::MethodName
+   2) reference to an instance method -> ContainingObject::InstanceMethodName
+   3) reference to a constructor -> ClassName::new
+
+-- Functional interface :
+-- An Interface that contains exactly one abstract method is known as functional interface
+-- It can have any number of default, static methods but can contain only one abstract method
+-- It can also declare methods of object class
+-- Functional Interface is also known as Single Abstract Method Interfaces or SAM Interfaces
+
+-- Optional Class :
+-- It is a public final class and used to deal with NullPointerException in Java application
+-- It provides methods which are used to check the presence of value for particular variable
+
+-- forEach() :
+-- It is defined in Iterable and Stream interface
+-- It is a default method defined in the Iterable interface
+-- Collection classes which extends Iterable interface can use forEach loop to iterate elements
+-- This method takes a single parameter which is a functional interface
+-- So, you can pass lambda expression as an argument
+
+-- Default Methods :
+-- Java provides a facility to create default methods inside the interface
+-- Methods which are defined inside the interface and tagged with default are known as default methods
+-- These methods are non-abstract methods
+
+-- StringJoiner :
+-- Java added a new final class StringJoiner in java.util package
+-- It is used to construct a sequence of characters separated by a delimiter
+-- you can create string by passing delimiters like comma(,), hyphen(-) etc
+-- You can also pass prefix and suffix to the char sequence
+
+-- Stream :
+-- Stream does not store elements
+-- It simply conveys elements from a source such as a data structure, an array, or an I/O channel, through a pipeline of computational operations
+-- Stream is functional in nature
+-- Operations performed on a stream does not modify it's source
+-- For example, filtering a Stream obtained from a collection produces a new Stream without the filtered elements,
+    rather than removing elements from the source collection
+-- The elements of a stream are only visited once during the life of a stream
+-- use stream to filter, collect, print, and convert from one data structure to other etc
+
+-- Java Nashorn
+-- it is a JavaScript engine
+-- it is used to execute JS code dynamically at JVM
+-- Java provides a command-line tool jjs which is used to execute JS code
+-- ex : jjs hello.js
