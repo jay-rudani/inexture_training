@@ -26,7 +26,7 @@
     <div class="d-flex justify-content-around">
       <div class="w-100 p-2">
         <label for="country">Country</label>
-        <select name="country" id="country" class="form-control country" required>
+        <select name="country" id="country" class="form-control country" onchange="myId(this.id)" required>
         </select>
       </div>
       <div class="w-100 p-2">

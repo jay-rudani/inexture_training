@@ -164,7 +164,7 @@
 
     <!-- bootstrap related scripts -->
     <script src="js/jquery-3.7.0.min.js"></script>
-    <script src="js/jquery.repeater.min.js"></script>
+    <script src="js/jquery.repeater.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/registerFormValidation.js"></script>
