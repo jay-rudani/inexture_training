@@ -68,6 +68,20 @@ public class LoginServlet extends HttpServlet {
 		return false;
 	}
 
+//	public static List<Address> getAddresses(String user_uuid){
+//		Connection connection = DatabaseConnection.getConnection();
+//		String query = "SELECT * FROM addresses WHERE user_uuid = ?";
+//		List<Address> addresses = new ArrayList<Address>();
+//		try {
+//			PreparedStatement statement = connection.prepareStatement(query);
+//			statement.setString(1, user_uuid);
+//			ResultSet resultSet = statement.executeQuery();
+//			
+//		}catch (SQLException ex) {
+//			ex.printStackTrace();
+//		}
+//	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

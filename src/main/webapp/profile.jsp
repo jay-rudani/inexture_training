@@ -162,6 +162,9 @@
                  </div>
                </div>
              </div>
+             <div>
+             	<jsp:include page="address.jsp"></jsp:include>
+             </div>
              <div class="d-flex justify-content-around">
                <button type="button" class="btn btn-primary">Edit</button>
                <button type="button" class="btn btn-success">

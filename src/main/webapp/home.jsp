@@ -19,11 +19,13 @@ if (session.getAttribute("isLoggedIn") == null || session.getAttribute("isLogged
 <body>
 	<jsp:include page="navbar.jsp" />
 	<jsp:include page="profile.jsp"></jsp:include>
-</body>
 	<script src="js/jquery-3.7.0.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.repeater.min.js"></script>
     <script src="js/profileEditSaveToggle.js"></script>
+    <script src="js/populateCSCData.js"></script>
+</body>
 </html>
 <%
 }

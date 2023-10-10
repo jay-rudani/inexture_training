@@ -24,6 +24,9 @@ import javax.servlet.http.Part;
 
 import connection.DatabaseConnection;
 import utility.Address;
+import utility.City;
+import utility.Country;
+import utility.State;
 import utility.UUIDGenerator;
 
 @WebServlet("/RegisterServlet")
@@ -86,9 +89,9 @@ public class RegisterServlet extends HttpServlet {
 				for (Address address : addresses) {
 					statementForAddress.setString(1, address.getAddressLine1());
 					statementForAddress.setString(2, address.getAddressLine2());
-					statementForAddress.setString(3, address.getCity());
-					statementForAddress.setString(4, address.getState());
-					statementForAddress.setString(5, address.getCountry());
+					statementForAddress.setInt(3, address.getCity().getId());
+					statementForAddress.setInt(4, address.getState().getId());
+					statementForAddress.setInt(5, address.getCountry().getId());
 					statementForAddress.setInt(6, Integer.parseInt(address.getPincode()));
 					statementForAddress.setString(7, uuid);
 					statementForAddress.addBatch();
@@ -198,8 +201,11 @@ public class RegisterServlet extends HttpServlet {
 
 		if (!pincodes.isEmpty()) {
 			for (int i = 0; i < pincodes.size(); i++) {
-				Address address = new Address(addressLine1.get(i), addressLine2.get(i), cities.get(i), states.get(i),
-						countries.get(i), pincodes.get(i));
+				Country country = new Country(Integer.parseInt(countries.get(i)));
+				State state = new State(Integer.parseInt(states.get(i)), country.getId());
+				City city = new City(Integer.parseInt(cities.get(i)), state.getId());
+				Address address = new Address(addressLine1.get(i), addressLine2.get(i), city, state, country,
+						pincodes.get(i));
 				addresses.add(address);
 			}
 		}
