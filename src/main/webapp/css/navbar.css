@@ -1,0 +1,20 @@
+.logoutBtn {
+	padding: 2%;
+	width: 100px;
+	/*border: 1px solid transparent;*/
+	box-shadow: inset 3px 3px 5px #babecc, inset -5px -5px 10px #fff;
+}
+
+.logoutBtn:hover {
+	/*border: 1px solid tomato;*/
+	box-shadow: 3px 3px 5px #babecc, -5px -5px 10px #fff;
+}
+
+.navbar-brand {
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px #babecc, -5px -5px 10px #fff;
+}
+
+.navbar-brand:hover {
+	box-shadow: inset 3px 3px 5px #babecc, inset -5px -5px 10px #fff;
+}

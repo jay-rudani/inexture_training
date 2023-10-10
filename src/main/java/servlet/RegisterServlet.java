@@ -195,10 +195,13 @@ public class RegisterServlet extends HttpServlet {
 		List<String> countries = getAddressFields("items\\[\\d+\\]\\[country\\]", request, response);
 		List<String> pincodes = getAddressFields("items\\[\\d+\\]\\[pincode\\]", request, response);
 		List<Address> addresses = new ArrayList<>();
-		for (int i = 0; i < pincodes.size(); i++) {
-			Address address = new Address(addressLine1.get(i), addressLine2.get(i), cities.get(i), states.get(i),
-					countries.get(i), pincodes.get(i));
-			addresses.add(address);
+
+		if (!pincodes.isEmpty()) {
+			for (int i = 0; i < pincodes.size(); i++) {
+				Address address = new Address(addressLine1.get(i), addressLine2.get(i), cities.get(i), states.get(i),
+						countries.get(i), pincodes.get(i));
+				addresses.add(address);
+			}
 		}
 
 		InputStream inputStream = null;

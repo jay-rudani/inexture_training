@@ -36,7 +36,7 @@
                     class="form-control"
                     required
                   />
-                  <small id="not-valid-firstname-message" class="d-none text-danger">Please enter valid first name!</small>
+                  <small id="firstNameMessage"></small>
                 </div>
                 <div class="form-group">
                   <label for="lastname">Last Name :</label>
@@ -47,6 +47,7 @@
                     class="form-control"
                     required
                   />
+                  <small id="lastNameMessage"></small>
                 </div>
                 <div class="form-group">
                   <label for="email">Email :</label>
@@ -57,6 +58,7 @@
                     class="form-control"
                     required
                   />
+                  <small id="emailMessage"></small>
                 </div>
                 <div class="form-group">
                   <label for="username">Username :</label>
@@ -67,6 +69,7 @@
                     class="form-control"
                     required
                   />
+                  <small id="userNameMessage"></small>
                 </div>
                 <div class="form-group">
                   <label for="password">Password :</label>
@@ -77,6 +80,7 @@
                     class="form-control"
                     required
                   />
+                  <small id="passwordMessage"></small>
                 </div>
                 <div class="form-group">
                   <label for="birthdate">Birth Date :</label>
@@ -87,6 +91,7 @@
                     class="form-control"
                     required
                   />
+                  <small id="birthDateMessage"></small>
                 </div>
                 <div data-repeater-list="items">
 					<div data-repeater-item>
@@ -94,7 +99,7 @@
                 	</div>
                 </div>
                 <div class="form-group">
-                	<button data-repeater-create type="button" class="btn btn-secondary">
+                	<button id="addAnotherBtn" data-repeater-create type="button" class="btn btn-secondary">
         				Add another
       				</button>
                 </div>
@@ -144,7 +149,12 @@
                   />
                   <label for="gujarati">Gujarati</label>
                 </div>
-                <button type="submit" class="btn btn-success">Register</button>
+                <div class="d-flex justify-content-around">
+                	<button type="submit" class="btn btn-success">Register</button>
+                	<a class="btn btn-primary" href="login.jsp">
+                		Login
+                	</a>
+                </div>
               </form>
             </div>
           </div>
@@ -158,20 +168,6 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/registerFormValidation.js"></script>
-    <script>
-      $(document).ready(function () {
-    	
-        $("#registerForm").repeater({
-          show: function () {
-            $(this).slideDown();
-          },
-          hide: function (deleteElement) {
-            if (confirm("Are you sure you want to delete this item?")) {
-              $(this).slideUp(deleteElement);
-            }
-          },
-        });
-      });
-    </script>
+    <script src="js/populateCSCData.js"></script>
   </body>
 </html>

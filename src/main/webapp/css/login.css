@@ -2,8 +2,9 @@ body {
 	background-color: #EBECF0;
 }
 
-.register-container {
+.login-container {
 	padding: 2%;
+	margin: 0 auto;
 }
 
 .neumorphic-bg {
@@ -13,9 +14,7 @@ body {
 	transition: box-shadow 0.3s ease-in-out;
 }
 
-input,
-select,
-option {
+input {
 	background-color: transparent;
 	font-size: 18px;
 	letter-spacing: 0.1em;
@@ -26,28 +25,6 @@ option {
 	border-radius: 30px;
 	box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
 	transition: all 0.2s ease-in-out;
-}
-
-input[type="file"] {
-	display: none;
-}
-
-label:not([for="gujarati"], [for="hindi"], [for="english"], [for="male"], [for="female"], [for="removeBtn"])::after,
-p::after {
-	content: " *";
-	color: red;
-}
-
-.fileLabel {
-	display: block;
-	background-color: transparent;
-	text-align: center;
-	margin: 0 auto;
-	max-width: 70px;
-	height: 70px;
-	overflow-wrap: break-word;
-	border-radius: 35px;
-	border: 1px solid black;
 }
 
 .btn-success,
