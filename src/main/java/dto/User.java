@@ -1,6 +1,9 @@
 package dto;
 
 import java.util.Date;
+import java.util.List;
+
+import utility.Address;
 
 public class User {
 
@@ -15,6 +18,7 @@ public class User {
 	private String gender;
 	private byte[] profile_pic;
 	private String userRole;
+	private List<Address> addresses;
 
 	public User(int id, String user_uuid, String firstName, String lastName, Date birthDate, String userName,
 			String email, String knownLanguages, String gender, byte[] profile_pic, String userRole) {
@@ -29,6 +33,24 @@ public class User {
 		this.gender = gender;
 		this.profile_pic = profile_pic;
 		this.userRole = userRole;
+	}
+
+	public User(int id, String user_uuid, String firstName, String lastName, Date birthDate, String userName,
+			String email, String knownLanguages, String gender, byte[] profile_pic, String userRole,
+			List<Address> addresses) {
+		super();
+		this.id = id;
+		this.user_uuid = user_uuid;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.userName = userName;
+		this.email = email;
+		this.knownLanguages = knownLanguages;
+		this.gender = gender;
+		this.profile_pic = profile_pic;
+		this.userRole = userRole;
+		this.addresses = addresses;
 	}
 
 	public String getUserRole() {
@@ -73,6 +95,10 @@ public class User {
 
 	public String getGender() {
 		return gender;
+	}
+
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
 }

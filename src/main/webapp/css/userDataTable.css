@@ -1,0 +1,23 @@
+body {
+	background-color: #ebecf0;
+}
+
+.form-control {
+	background-color: transparent;
+	border-radius: 20px;
+	min-width: 150px;
+	box-shadow: 3px 3px 5px #babecc, -5px -5px 10px #fff;
+}
+
+.form-control:focus {
+	background-color: transparent;
+	border: none;
+	box-shadow: inset 3px 3px 5px #babecc, inset -5px -5px 10px #fff;
+}
+
+.table {
+	border-radius: 25px;
+	padding: 2%;
+	margin-top: 2%;
+	box-shadow: 3px 3px 5px #babecc, -5px -5px 10px #fff;
+}

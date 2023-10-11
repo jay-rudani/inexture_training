@@ -1,3 +1,7 @@
+<%
+	if(request.getSession().getAttribute("isLoggedIn")!=null
+	&& request.getSession().getAttribute("isLoggedIn").equals(true)) {
+%>
 <section>
 	<nav class="navbar navbar-expand-lg navbar-light">
 	  <a class="navbar-brand p-2" href="home.jsp">Home</a>
@@ -6,6 +10,16 @@
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarText">
 	    <ul class="navbar-nav mr-auto">
+	    	<%
+	    		if(request.getSession().getAttribute("isADMIN")!=null
+	    		&& request.getSession().getAttribute("isADMIN").equals(true)){
+	    	%>
+	    	<li class="nav-item">
+        		<a class="nav-link" href="ViewUsersServlet">View Users</a>
+      		</li>
+      		<%
+	    		}
+      		%>
 	    </ul>
 	    <span class="navbar-text">
 	      <a href="LogoutServlet" class="btn logoutBtn">Logout</a>
@@ -13,3 +27,4 @@
 	  </div>
 	</nav>
 </section>
+<% } %>

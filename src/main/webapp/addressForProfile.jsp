@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%
 	List<Address> addresses;
-	int n=0;
+	int n=1;
 	if(request.getSession().getAttribute("userAddresses")!=null) {
 		addresses = (List<Address>) request.getSession().getAttribute("userAddresses");
 		for(Address address:addresses){
@@ -19,7 +19,6 @@
           name="addressLine1"
           type="text"
           value='<%=address.getAddressLine1() %>'
-          required
         />
       </div>
       <div class="w-100 p-2">
@@ -30,26 +29,25 @@
           name="addressLine2"
           type="text"
           value="<%=address.getAddressLine2() %>"
-          required
         />
       </div>
     </div>
     <div class="d-flex justify-content-around">
       <div class="w-100 p-2">
-        <label for="country<%=n %>">Country</label>
-        <select name="country<%=n %>" id="country<%=n %>" class="form-control country" required>
-        	<option value="<%=address.getCountry().getId() %>"><%=address.getCountry().getName() %></option>
+        <label for="country">Country</label>
+        <select name="country" id="country_<%=n %>" class="form-control country" onchange="countryFn(this.id)">
+        	<option selected value="<%=address.getCountry().getId() %>"><%=address.getCountry().getName() %></option>
         </select>
       </div>
       <div class="w-100 p-2">
-        <label for="state<%=n %>">State</label>
-        <select name="state<%=n %>" id="state<%=n %>" class="form-control state" required>
+        <label for="state">State</label>
+        <select name="state" id="state_<%=n %>" onchange="stateFn(this.id)" class="form-control state" >
         	<option value="<%=address.getState().getId() %>"><%=address.getState().getName() %></option>
         </select>
       </div>
       <div class="w-100 p-2">
-        <label for="city<%=n %>">City</label>
-        <select name="city<%=n %>" id="city<%=n %>" class="form-control city" required>
+        <label for="city">City</label>
+        <select name="city" id="city_<%=n %>" class="form-control city" >
         	<option value="<%=address.getCity().getId() %>"><%=address.getCity().getName() %></option>
         </select>
       </div>
@@ -57,7 +55,7 @@
     <div class="d-flex justify-content-between">
       <div class="p-2 w-50">
         <label for="pincode">Pincode</label>
-        <input type="number" id="pincode" name="pincode" class="form-control" value="<%=address.getPincode() %>" required/>
+        <input type="number" id="pincode" name="pincode" class="form-control" value="<%=address.getPincode() %>"/>
       </div>
       <div class="p-2">
         <label for="removeBtn">&nbsp;</label>
@@ -70,4 +68,28 @@
     </div>
   </div>
 </div>
-<% n++; } } %>
+<% n++; }%> 
+
+<script>
+<%for(int a=n-1;a>0;a--){%>
+populateCountryDropdown(<%=a%>);
+<%}%>
+</script>
+
+<script>
+$(function(){
+<%for(int a=n-1;a>0;a--){%>
+populateStateDropdown(<%=a%>,$("select#country_" + <%=a%>).val());
+<%}%>
+});
+</script>
+
+<script>
+$(function(){
+<%for(int a=n-1;a>0;a--){%>
+setTimeout(function(){populateCityDropdown(<%=a%>,$("select#state_" + <%=a%>).val())},100);
+<%}%>
+});
+</script>
+	
+<%} %>

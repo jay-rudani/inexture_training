@@ -11,18 +11,21 @@
  <div class="container">
    <div class="row p-3">
      <div class="col-md-12">
-       <form action="#" method="post" id="profileForm">
+       <form action="register.jsp" method="post" id="profileForm">
          <div class="form-div d-md-flex d-sm-block">
            <div class="profile-pic-div p-2 w-100">
              <div class="profile-pic">
                <% 
-               		byte[] profile_pic = user.getProfile_pic(); if (profile_pic != null) { String
-					base64Image = new String(Base64.getEncoder().encode(profile_pic)); %>
+               		byte[] profile_pic = user.getProfile_pic(); 
+               		if (profile_pic != null) { 
+               			String base64Image = new String(Base64.getEncoder().encode(profile_pic)); %>
 					<img
 					  class="img-fluid"
 					  src="data:image;base64,<%=base64Image%>"
 					  alt="profile_pic"
+					  
 					/>
+					<input type="hidden" value="<%=base64Image%>" name="profile_pic" />
 				<% } %>	
              </div>
              <div class="change-pic-btn mt-4">
@@ -168,10 +171,7 @@
              </div>
              
              <div class="d-flex justify-content-around">
-               <button type="button" class="btn btn-primary">Edit</button>
-               <button type="button" class="btn btn-success">
-                 	Save changes
-               </button>
+               <button type="submit" class="btn btn-primary">Edit</button>
              </div>
            </div>
          </div>
