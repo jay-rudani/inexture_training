@@ -48,7 +48,7 @@
       <div class="p-2">
         <label for="removeBtn">&nbsp;</label>
         <div>
-          <button data-repeater-delete type="button" class="btn btn-danger">
+          <button data-repeater-delete type="button" id="removeBtnForRepeater" class="btn btn-danger">
             Remove
           </button>
         </div>

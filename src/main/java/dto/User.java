@@ -20,6 +20,10 @@ public class User {
 	private String userRole;
 	private List<Address> addresses;
 
+	public User() {
+		super();
+	}
+
 	public User(int id, String user_uuid, String firstName, String lastName, Date birthDate, String userName,
 			String email, String knownLanguages, String gender, byte[] profile_pic, String userRole) {
 		this.id = id;
@@ -50,6 +54,54 @@ public class User {
 		this.gender = gender;
 		this.profile_pic = profile_pic;
 		this.userRole = userRole;
+		this.addresses = addresses;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setUser_uuid(String user_uuid) {
+		this.user_uuid = user_uuid;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setKnownLanguages(String knownLanguages) {
+		this.knownLanguages = knownLanguages;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public void setProfile_pic(byte[] profile_pic) {
+		this.profile_pic = profile_pic;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
 

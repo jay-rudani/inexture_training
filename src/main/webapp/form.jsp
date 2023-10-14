@@ -1,9 +1,11 @@
-<div class="form-group">
-	<% 
-		boolean isLoggedIn = 
+<%
+boolean isLoggedIn = 
 		request.getSession().getAttribute("isLoggedIn") != null && 
 		request.getSession().getAttribute("isLoggedIn").equals(true);
-	
+%>
+<form id="registerForm" <% if(isLoggedIn){ %>action="UpdateServlet" <% }else{ %> action="RegisterServlet" <% } %> method="post" enctype="multipart/form-data" onsubmit="return validateFields()">
+<div class="form-group">
+	<% 
    		if (isLoggedIn) {
    	%>
    		<div class="profile-pic">	
@@ -13,6 +15,18 @@
 			  alt="profile_pic"
 			/>
 		</div>
+		<input type="hidden" name="profile_pic_data" value="data:image;base64,<%=request.getParameter("profile_pic")%>" />
+		<div class="change-pic-btn mt-4">
+          <input
+            type="file"
+            name="profile_picture"
+            id="profile_picture"
+            class="d-none"
+          />
+          <label for="profile_picture" class="changeBtn"
+            >Change Photo</label
+          >
+        </div>
 	<% } else { %>
 		<label for="profilepic" class="fileLabel"
 		  ><b class="addIcon">Add Image</b></label>
@@ -142,16 +156,53 @@
 </div>
 <div class="form-group">
 	<p>Known Languages :</p>
-	<input type="checkbox" name="languages" id="english" value="English" />
+	<input type="checkbox" name="languages" id="english" value="English" 
+	<%
+		if(request.getParameter("english")!=null){
+	%>
+	checked
+	<% } %>
+	/>
 	<label for="english">English</label>
 	<br />
-	<input type="checkbox" name="languages" id="hindi" value="Hindi" />
+	<input type="checkbox" name="languages" id="hindi" value="Hindi" 
+	<%
+		if(request.getParameter("hindi")!=null){
+	%>
+	checked
+	<% } %>
+	/>
 	<label for="hindi">Hindi</label>
 	<br />
-	<input type="checkbox" name="languages" id="gujarati" value="Gujarati" />
+	<input type="checkbox" name="languages" id="gujarati" value="Gujarati" 
+	<%
+		if(request.getParameter("gujarati")!=null){
+	%>
+	checked
+	<% } %>
+	/>
 	<label for="gujarati">Gujarati</label>
 </div>
 <div class="d-flex justify-content-around">
+	<% if(isLoggedIn) { %>
+		<button type="submit" class="btn btn-success">Save Changes</button>
+	<% }else{ %>
 	<button type="submit" class="btn btn-success">Register</button>
     <a class="btn btn-primary" href="login.jsp"> Login </a>
+    <% } %>
 </div>
+</form>
+<% if(isLoggedIn){ %>
+<script>
+	$(function(){
+		$("#removeBtnForRepeater").click();
+		$(".removeBtnForSavedAddress").click(function () {
+			/* $(this).closest("div.form-group").prop("disabled", true); */
+	        let item = $(this).closest("div.form-group");
+			item.find("input").prop("disabled",true);
+			item.find("select").prop("disabled",true);
+			item.slideUp(400);
+	    });
+	});
+</script>
+<% } %>

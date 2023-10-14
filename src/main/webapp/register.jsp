@@ -1,11 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+boolean isLoggedIn = 
+		request.getSession().getAttribute("isLoggedIn") != null && 
+		request.getSession().getAttribute("isLoggedIn").equals(true);
+%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
+    <title>
+    	<% if(isLoggedIn){ %>
+    	Edit
+    	<% }else{ %>
+    	Register
+    	<% } %>
+    </title>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/all.min.css" />
     <link rel="stylesheet" href="css/register.css" />
@@ -27,9 +38,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="neumorphic-bg">
-              <form id="registerForm" action="RegisterServlet" method="post" enctype="multipart/form-data" onsubmit="return validateFields()">
                 <jsp:include page="form.jsp"></jsp:include>
-              </form>
             </div>
           </div>
         </div>

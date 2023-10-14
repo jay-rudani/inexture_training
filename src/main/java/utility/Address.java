@@ -2,6 +2,7 @@ package utility;
 
 public class Address {
 
+	private int id;
 	private String addressLine1;
 	private String addressLine2;
 	private City city;
@@ -17,6 +18,26 @@ public class Address {
 		this.state = state;
 		this.country = country;
 		this.pincode = pincode;
+	}
+
+	public Address(int id, String addressLine1, String addressLine2, City city, State state, Country country,
+			String pincode) {
+		super();
+		this.id = id;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.pincode = pincode;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getAddressLine1() {

@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 				Country country = getCountry(resultSet.getInt("address_country"));
 				State state = getState(resultSet.getInt("address_state"));
 				City city = getCity(resultSet.getInt("address_city"));
-				Address address = new Address(resultSet.getString("address_line_1"),
+				Address address = new Address(resultSet.getInt("address_id"),resultSet.getString("address_line_1"),
 						resultSet.getString("address_line_2"), city, state, country,
 						String.valueOf(resultSet.getInt("address_pincode")));
 				addresses.add(address);

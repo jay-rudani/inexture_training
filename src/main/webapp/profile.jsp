@@ -16,7 +16,7 @@
            <div class="profile-pic-div p-2 w-100">
              <div class="profile-pic">
                <% 
-               		byte[] profile_pic = user.getProfile_pic(); 
+               		byte[] profile_pic = user.getProfile_pic();
                		if (profile_pic != null) { 
                			String base64Image = new String(Base64.getEncoder().encode(profile_pic)); %>
 					<img
@@ -27,17 +27,6 @@
 					/>
 					<input type="hidden" value="<%=base64Image%>" name="profile_pic" />
 				<% } %>	
-             </div>
-             <div class="change-pic-btn mt-4">
-               <input
-                 type="file"
-                 name="profile_picture"
-                 id="profile_picture"
-                 class="d-none"
-               />
-               <label for="profile_picture" class="changeBtn"
-                 >Change Photo</label
-               >
              </div>
              <div class="birth-date mt-2">
                <div class="form-group">
