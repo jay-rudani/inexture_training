@@ -4,6 +4,8 @@ boolean isLoggedIn =
 		request.getSession().getAttribute("isLoggedIn").equals(true);
 %>
 <form id="registerForm" <% if(isLoggedIn){ %>action="UpdateServlet" <% }else{ %> action="RegisterServlet" <% } %> method="post" enctype="multipart/form-data" onsubmit="return validateFields()">
+<input type="hidden" name="user_id" value="<%=request.getParameter("user_id")%>" />
+<input type="hidden" name="user_uuid" value="<%=request.getParameter("user_uuid")%>" />
 <div class="form-group">
 	<% 
    		if (isLoggedIn) {
@@ -40,6 +42,7 @@ boolean isLoggedIn =
 	<% } %>
 </div>
 <div class="form-group">
+	${requestScope.firstname}
 	<label for="firstname">First Name :</label>
 	<input
 	  type="text"

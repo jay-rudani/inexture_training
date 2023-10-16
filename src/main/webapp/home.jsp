@@ -27,7 +27,6 @@ if (session.getAttribute("isLoggedIn") == null || session.getAttribute("isLogged
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/profileFieldDisabler.js"></script>
-    
 </body>
 </html>
 <%

@@ -15,6 +15,8 @@
          <div class="form-div d-md-flex d-sm-block">
            <div class="profile-pic-div p-2 w-100">
              <div class="profile-pic">
+             <input type="hidden" name="user_id" value="<%=user.getId() %>" />
+             <input type="hidden" name="user_uuid" value="<%=user.getUser_uuid() %>" />
                <% 
                		byte[] profile_pic = user.getProfile_pic();
                		if (profile_pic != null) { 

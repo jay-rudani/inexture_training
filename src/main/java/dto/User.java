@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class User {
 	private byte[] profile_pic;
 	private String userRole;
 	private List<Address> addresses;
+	private String profile_pic_string;
 
 	public User() {
 		super();
@@ -151,6 +153,14 @@ public class User {
 
 	public List<Address> getAddresses() {
 		return addresses;
+	}
+
+	public void setProfile_pic_string(byte[] array) {
+		this.profile_pic_string = Base64.getEncoder().encodeToString(array);
+	}
+
+	public String getProfile_pic_string() {
+		return profile_pic_string;
 	}
 
 }

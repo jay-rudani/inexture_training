@@ -36,6 +36,9 @@
                     class="form-control"
                     required
                   />
+                  <div class="form-group mt-2">
+                  	<a class="btn-link" href="ForgotPassword.jsp">Forgot Password?</a>
+                  </div>
                 </div>
                 <div class="d-flex justify-content-around">
                 	<button type="submit" class="btn btn-success">Login</button>

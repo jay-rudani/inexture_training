@@ -54,6 +54,7 @@ public class ViewUsersServlet extends HttpServlet {
 				addresses = getAddresses(user_uuid);
 				User user = new User(user_id, user_uuid, firstName, lastName, birthDate, userName, email,
 						knownLanguages, gender, profile_pic, user_role, addresses);
+				user.setProfile_pic_string(profile_pic);
 				users.add(user);
 			}
 			return users;
@@ -73,7 +74,7 @@ public class ViewUsersServlet extends HttpServlet {
 			statement.setString(1, uuid);
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				Address address = new Address(rs.getString("address_line_1"), rs.getString("address_line_2"),
+				Address address = new Address(rs.getInt("address_id"),rs.getString("address_line_1"), rs.getString("address_line_2"),
 						getCity(rs.getInt("address_city")), getState(rs.getInt("address_state")),
 						getCountry(rs.getInt("address_country")), String.valueOf(rs.getInt("address_pincode")));
 				addresses.add(address);

@@ -90,7 +90,7 @@ public class UpdateServlet extends HttpServlet {
 			int[] rows1 = statementForAddress.executeBatch();
 			int[] rows2 = statementForSavedAddress.executeBatch();
 
-			if (row > 0 && rows1.length > 0 && rows2.length > 0) {
+			if (row > 0 || rows1.length > 0 || rows2.length > 0) {
 				System.out.println("UPDATED");
 			} else {
 				System.out.println("ERROR");
@@ -140,10 +140,10 @@ public class UpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 
-		User user = (User) request.getSession().getAttribute("userData");
+//		User user = (User) request.getSession().getAttribute("userData");
 		User updatedUser = new User();
-		int userId = user.getId();
-		String userUUID = user.getUser_uuid();
+		int userId = Integer.parseInt(request.getParameter("user_id"));
+		String userUUID = request.getParameter("user_uuid");
 		InputStream inputStream = null;
 
 		String first_name = request.getParameter("firstname");
