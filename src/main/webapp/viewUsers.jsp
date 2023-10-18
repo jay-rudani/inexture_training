@@ -53,13 +53,47 @@
 						userForm+='<td><input type="text" class="form-control" value="'+user.email+'" /></td>';
 						userForm+='<td><input type="text" class="form-control" value="'+user.userName+'" /></td>';
 						userForm+='<td><input type="text" class="form-control" value="'+user.birthDate+'" /></td>';
-						userForm+='<td><button type="button" class="btn btn-sm btn-secondary" >View Addresses</button></td>';
+						userForm+='<td><button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#addressModalCenter'+user.id+'" >View Addresses</button></td>';
 						userForm+='<td><a class="btn btn-sm btn-primary" href="GetUserDetailsServlet?user_id='+user.id+'" >Update</a></td>';
 						userForm+='<td><button type="button" onclick="deleteUser(this.id)" class="btn btn-sm btn-danger" id="'+user.id+'" >Delete</button></td>';
 						userForm+='</tr>';
 						userForm+='';
 						
+						var addressModal = '';
+						addressModal+='<div class="modal fade" id="addressModalCenter'+user.id+'" tabindex="-1" role="dialog" aria-labelledby="addressModalCenterTitle" aria-hidden="true">';
+						addressModal+='<div class="modal-dialog modal-dialog-centered" role="document">';
+					    addressModal+='<div class="modal-content">';
+					    addressModal+='<div class="modal-header">';
+					    addressModal+='<h5 class="modal-title" id="addressModalLongTitle">Address(s) :</h5>';
+					    addressModal+='<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+					    addressModal+='<span aria-hidden="true">&times;</span>';
+					    addressModal+='</button>';
+					    addressModal+='</div>';
+					    addressModal+='<div class="modal-body">';
+					    user.addresses.forEach(function(address){
+						    addressModal+='<div style="margin-top:2%; padding:1%; border: 2px solid #babecc; border-radius: 25px">';
+						    addressModal+='<label>Address :</label>'
+						    addressModal+='<div class="form-group d-flex justify-content-around">';
+						    addressModal+='<div class="p-2"><label>Address Line 1 :</label><input type="text" class="form-control" value="'+address.addressLine1+'" disabled /></div>'
+						    addressModal+='<div class="p-2"><label>Address Line 2 :</label><input type="text" class="form-control" value="'+address.addressLine2+'" disabled /></div>'
+						    addressModal+='</div>';
+						    addressModal+='<div class="form-group d-flex">';
+						    addressModal+='<div><label>Country :</label><input class="form-control" value="'+address.country.name+'" disabled></div>';
+						    addressModal+='<div><label>State :</label><input class="form-control" value="'+address.state.name+'" disabled></div>';
+						    addressModal+='<div><label>City :</label><input class="form-control" value="'+address.city.name+'" disabled></div>';
+						    addressModal+='</div>';
+						    addressModal+='<div class="form-group d-flex justify-content-start">';
+						    addressModal+='<div><label>Pincode :</label><input class="form-control" value="'+address.pincode+'" disabled></div>';
+						   	addressModal+='</div>';
+						    addressModal+='</div>';
+					    })
+					    addressModal+='</div>';
+					    addressModal+='</div>';
+					    addressModal+='</div>';
+					    addressModal+='</div>';
+						
 						$("#usersTableBody").append(userForm);
+						$("table").append(addressModal);
 					});
 				});
 				

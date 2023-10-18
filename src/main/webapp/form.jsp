@@ -27,7 +27,7 @@
 %>
 <form id="registerForm" <% if(isLoggedIn){ %>action="UpdateServlet" <% }else{ %> action="RegisterServlet" <% } %> method="post" enctype="multipart/form-data" onsubmit="return validateFields()">
 <input type="hidden" name="user_id" <% if(isLoggedIn) { %> value="<%=user.getId()%>" <%} %> />
-<input type="hidden" name="user_uuid" <% if(isLoggedIn) { %> value="<%=user.getId()%>" <%} %> />
+<input type="hidden" name="user_uuid" <% if(isLoggedIn) { %> value="<%=user.getUser_uuid()%>" <%} %> />
 <div class="form-group">
 	<% 
    		if (isLoggedIn) {

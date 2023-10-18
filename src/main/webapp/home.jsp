@@ -17,6 +17,7 @@ if (session.getAttribute("isLoggedIn") == null || session.getAttribute("isLogged
     <link rel="stylesheet" href="css/navbar.css" />
 </head>
 <body>
+	<% request.getSession().removeAttribute("manageUserData"); %>
 	<jsp:include page="navbar.jsp" />
 	<jsp:include page="profile.jsp" />
 	
