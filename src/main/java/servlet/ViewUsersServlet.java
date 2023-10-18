@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +16,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import connection.DatabaseConnection;
 import dto.User;
@@ -74,9 +77,10 @@ public class ViewUsersServlet extends HttpServlet {
 			statement.setString(1, uuid);
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
-				Address address = new Address(rs.getInt("address_id"),rs.getString("address_line_1"), rs.getString("address_line_2"),
-						getCity(rs.getInt("address_city")), getState(rs.getInt("address_state")),
-						getCountry(rs.getInt("address_country")), String.valueOf(rs.getInt("address_pincode")));
+				Address address = new Address(rs.getInt("address_id"), rs.getString("address_line_1"),
+						rs.getString("address_line_2"), getCity(rs.getInt("address_city")),
+						getState(rs.getInt("address_state")), getCountry(rs.getInt("address_country")),
+						String.valueOf(rs.getInt("address_pincode")));
 				addresses.add(address);
 			}
 			return addresses;
@@ -141,22 +145,25 @@ public class ViewUsersServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
 		if (request.getSession().getAttribute("isADMIN") != null
 				&& request.getSession().getAttribute("isADMIN").equals(true)) {
 			User user = (User) request.getSession().getAttribute("userData");
 			List<User> users = getUsers(user.getId());
 			if (!(users.isEmpty())) {
-				request.getSession().setAttribute("allUsersData", users);
-				response.sendRedirect("viewUsers.jsp");
+//				request.getSession().setAttribute("allUsersData", users);
+				out.print(new Gson().toJson(users));
+			} else {
+				response.sendRedirect("home.jsp");
 			}
-		}
-		else if((request.getSession().getAttribute("isADMIN") != null
+		} else if ((request.getSession().getAttribute("isADMIN") != null
 				&& request.getSession().getAttribute("isADMIN").equals(false))
 				&& (request.getSession().getAttribute("isLoggedIn") != null
 						&& request.getSession().getAttribute("isLoggedIn").equals(true))) {
 			response.sendRedirect("home.jsp");
-		}else {
+		} else {
 			response.sendRedirect("login.jsp");
 		}
 	}

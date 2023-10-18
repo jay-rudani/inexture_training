@@ -34,8 +34,8 @@ import utility.State;
 public class UpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public static void updateRecord(int userId, String uuid, User user, InputStream profile_picture,
-			List<Address> addresses, List<Address> savedAddresses) {
+	public static int updateRecord(int userId, String uuid, User user, InputStream profile_picture,
+			List<Address> addresses) {
 
 		Connection connection = DatabaseConnection.getConnection();
 		String updateQuery = "UPDATE users SET " + "user_first_name = ?, " + "user_last_name = ?, "
@@ -64,26 +64,26 @@ public class UpdateServlet extends HttpServlet {
 			statement.setString(10, uuid);
 
 			for (Address address : addresses) {
-				statementForAddress.setString(1, address.getAddressLine1());
-				statementForAddress.setString(2, address.getAddressLine2());
-				statementForAddress.setInt(3, address.getCity().getId());
-				statementForAddress.setInt(4, address.getState().getId());
-				statementForAddress.setInt(5, address.getCountry().getId());
-				statementForAddress.setInt(6, Integer.parseInt(address.getPincode()));
-				statementForAddress.setString(7, uuid);
-				statementForAddress.addBatch();
-			}
-
-			for (Address savedAddress : savedAddresses) {
-				statementForSavedAddress.setString(1, savedAddress.getAddressLine1());
-				statementForSavedAddress.setString(2, savedAddress.getAddressLine2());
-				statementForSavedAddress.setInt(3, savedAddress.getCity().getId());
-				statementForSavedAddress.setInt(4, savedAddress.getState().getId());
-				statementForSavedAddress.setInt(5, savedAddress.getCountry().getId());
-				statementForSavedAddress.setInt(6, Integer.parseInt(savedAddress.getPincode()));
-				statementForSavedAddress.setString(7, uuid);
-				statementForSavedAddress.setInt(8, savedAddress.getId());
-				statementForSavedAddress.addBatch();
+				if (address.getId() == 0) {
+					statementForAddress.setString(1, address.getAddressLine1());
+					statementForAddress.setString(2, address.getAddressLine2());
+					statementForAddress.setInt(3, address.getCity().getId());
+					statementForAddress.setInt(4, address.getState().getId());
+					statementForAddress.setInt(5, address.getCountry().getId());
+					statementForAddress.setInt(6, Integer.parseInt(address.getPincode()));
+					statementForAddress.setString(7, uuid);
+					statementForAddress.addBatch();
+				} else {
+					statementForSavedAddress.setString(1, address.getAddressLine1());
+					statementForSavedAddress.setString(2, address.getAddressLine2());
+					statementForSavedAddress.setInt(3, address.getCity().getId());
+					statementForSavedAddress.setInt(4, address.getState().getId());
+					statementForSavedAddress.setInt(5, address.getCountry().getId());
+					statementForSavedAddress.setInt(6, Integer.parseInt(address.getPincode()));
+					statementForSavedAddress.setString(7, uuid);
+					statementForSavedAddress.setInt(8, address.getId());
+					statementForSavedAddress.addBatch();
+				}
 			}
 
 			int row = statement.executeUpdate();
@@ -91,14 +91,13 @@ public class UpdateServlet extends HttpServlet {
 			int[] rows2 = statementForSavedAddress.executeBatch();
 
 			if (row > 0 || rows1.length > 0 || rows2.length > 0) {
-				System.out.println("UPDATED");
-			} else {
-				System.out.println("ERROR");
+				return 1;
 			}
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+		return 0;
 	}
 
 	public static List<String> getAddressFields(String regex, HttpServletRequest request,
@@ -133,14 +132,12 @@ public class UpdateServlet extends HttpServlet {
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 
-//		User user = (User) request.getSession().getAttribute("userData");
 		User updatedUser = new User();
 		int userId = Integer.parseInt(request.getParameter("user_id"));
 		String userUUID = request.getParameter("user_uuid");
@@ -183,6 +180,7 @@ public class UpdateServlet extends HttpServlet {
 			updatedUser.setKnownLanguages(selectedValues.toString());
 		}
 
+		List<String> addressId = getAddressFields("items\\[\\d+\\]\\[addressId\\]", request, response);
 		List<String> addressLine1 = getAddressFields("items\\[\\d+\\]\\[addressLine1\\]", request, response);
 		List<String> addressLine2 = getAddressFields("items\\[\\d+\\]\\[addressLine2\\]", request, response);
 		List<String> cities = getAddressFields("items\\[\\d+\\]\\[city\\]", request, response);
@@ -196,34 +194,26 @@ public class UpdateServlet extends HttpServlet {
 				Country country = new Country(Integer.parseInt(countries.get(i)));
 				State state = new State(Integer.parseInt(states.get(i)), country.getId());
 				City city = new City(Integer.parseInt(cities.get(i)), state.getId());
-				Address address = new Address(addressLine1.get(i), addressLine2.get(i), city, state, country,
-						pincodes.get(i));
+				int address_id = addressId.get(i).isEmpty() ? 0 : Integer.parseInt(addressId.get(i));
+				Address address = new Address(address_id, addressLine1.get(i), addressLine2.get(i), city, state,
+						country, pincodes.get(i));
 				addresses.add(address);
 			}
 		}
 
-		List<String> savedAddressId = getAddressFields("savedAddressId_\\d+", request, response);
-		List<String> savedAddressLine1 = getAddressFields("savedAddressLine1_\\d+", request, response);
-		List<String> savedAddressLine2 = getAddressFields("savedAddressLine2_\\d+", request, response);
-		List<String> savedCities = getAddressFields("savedCity_\\d+", request, response);
-		List<String> savedStates = getAddressFields("savedState_\\d+", request, response);
-		List<String> savedCountries = getAddressFields("savedCountry_\\d+", request, response);
-		List<String> savedPincodes = getAddressFields("savedPincode_\\d+", request, response);
-		List<Address> savedAddresses = new ArrayList<>();
-
-		if (!savedPincodes.isEmpty()) {
-			for (int i = 0; i < savedPincodes.size(); i++) {
-				Country country = new Country(Integer.parseInt(savedCountries.get(i)));
-				State state = new State(Integer.parseInt(savedStates.get(i)), country.getId());
-				City city = new City(Integer.parseInt(savedCities.get(i)), state.getId());
-				Address address = new Address(Integer.parseInt(savedAddressId.get(i)), savedAddressLine1.get(i),
-						savedAddressLine2.get(i), city, state, country, savedPincodes.get(i));
-				savedAddresses.add(address);
+		deleteSavedAddress(addressId, userUUID);
+		if (updateRecord(userId, userUUID, updatedUser, inputStream, addresses) == 1) {
+			if (request.getSession().getAttribute("manageUserData") != null) {
+				System.out.println("before remove");
+				request.getSession().removeAttribute("manageUserData");
+				System.out.println("after remove");
+				response.sendRedirect("viewUsers.jsp");
+			} else {
+				response.sendRedirect("home.jsp");
 			}
+		} else {
+			System.out.println("ERROR");
 		}
-
-		deleteSavedAddress(savedAddressId, userUUID);
-		updateRecord(userId, userUUID, updatedUser, inputStream, addresses, savedAddresses);
 
 	}
 }

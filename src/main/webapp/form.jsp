@@ -1,11 +1,33 @@
+<%@page import="dto.User"%>
+<%@page import="com.google.gson.Gson"%>
+<%@page import="utility.Address"%>
+<%@page import="java.util.List"%>
+<%!User user; %>
 <%
-boolean isLoggedIn = 
+	boolean isLoggedIn = 
 		request.getSession().getAttribute("isLoggedIn") != null && 
 		request.getSession().getAttribute("isLoggedIn").equals(true);
+
+	if(isLoggedIn){
+		if(request.getSession().getAttribute("userData")!=null && request.getSession().getAttribute("manageUserData")!=null){
+			
+			user = (User) request.getSession().getAttribute("manageUserData");
+			
+		}else{
+			
+			user = (User) request.getSession().getAttribute("userData");
+		}
+		
+		user.setProfile_pic_string(user.getProfile_pic());
+		List<Address> addressList = user.getAddresses();
+		Gson gson = new Gson();
+		String addressListAsJSON = gson.toJson(addressList); // Using Gson library to convert to JSON
+		request.setAttribute("addressListAsJSON", addressListAsJSON);
+	}
 %>
 <form id="registerForm" <% if(isLoggedIn){ %>action="UpdateServlet" <% }else{ %> action="RegisterServlet" <% } %> method="post" enctype="multipart/form-data" onsubmit="return validateFields()">
-<input type="hidden" name="user_id" value="<%=request.getParameter("user_id")%>" />
-<input type="hidden" name="user_uuid" value="<%=request.getParameter("user_uuid")%>" />
+<input type="hidden" name="user_id" <% if(isLoggedIn) { %> value="<%=user.getId()%>" <%} %> />
+<input type="hidden" name="user_uuid" <% if(isLoggedIn) { %> value="<%=user.getId()%>" <%} %> />
 <div class="form-group">
 	<% 
    		if (isLoggedIn) {
@@ -13,11 +35,11 @@ boolean isLoggedIn =
    		<div class="profile-pic">	
 			<img
 			  class="img-fluid"
-			  src="data:image;base64,<%=request.getParameter("profile_pic")%>"
+			  src="data:image;base64,<%=user.getProfile_pic_string() %>"
 			  alt="profile_pic"
 			/>
 		</div>
-		<input type="hidden" name="profile_pic_data" value="data:image;base64,<%=request.getParameter("profile_pic")%>" />
+		<input type="hidden" name="profile_pic_data" value="data:image;base64,<%=user.getProfile_pic_string() %>" />
 		<div class="change-pic-btn mt-4">
           <input
             type="file"
@@ -42,7 +64,6 @@ boolean isLoggedIn =
 	<% } %>
 </div>
 <div class="form-group">
-	${requestScope.firstname}
 	<label for="firstname">First Name :</label>
 	<input
 	  type="text"
@@ -50,7 +71,7 @@ boolean isLoggedIn =
 	  id="firstname"
 	  class="form-control"
 	  <% if(isLoggedIn) { %>
-	  	value="<%=request.getParameter("firstname") %>"
+	  	value="<%=user.getFirstName() %>"
 	  <% } %>
 	  required
 	/>
@@ -64,7 +85,7 @@ boolean isLoggedIn =
 	  id="lastname"
 	  class="form-control"
 	  <% if(isLoggedIn) { %>
-	  	value="<%=request.getParameter("lastname") %>"
+	  	value="<%=user.getLastName()%>"
 	  <% } %>
 	  required
 	/>
@@ -78,7 +99,7 @@ boolean isLoggedIn =
 	  id="email"
 	  class="form-control"
 	  <% if(isLoggedIn) { %>
-	  	value="<%=request.getParameter("email") %>"
+	  	value="<%=user.getEmail() %>"
 	  <% } %>
 	  required
 	/>
@@ -92,7 +113,7 @@ boolean isLoggedIn =
 	  id="username"
 	  class="form-control"
 	  <% if(isLoggedIn) { %>
-	  	value="<%=request.getParameter("username") %>"
+	  	value="<%=user.getUserName()%>"
 	  <% } %>
 	  required
 	/>
@@ -119,13 +140,13 @@ boolean isLoggedIn =
 	  id="birthdate"
 	  class="form-control"
 	  <% if(isLoggedIn) { %>
-	  	value="<%=request.getParameter("birthdate") %>"
+	  	value="<%=user.getBirthDate() %>"
 	  <% } %>
 	  required
 	/>
 	<small id="birthDateMessage"></small>
 </div>
-<jsp:include page="addressForProfile.jsp" />
+<%-- <jsp:include page="addressForProfile.jsp" /> --%>
 <div data-repeater-list="items">
 	<div data-repeater-item>
 	  	<jsp:include page="address.jsp" />
@@ -144,16 +165,16 @@ boolean isLoggedIn =
 <div class="form-group">
 	<p>Gender :</p>
 	<input type="radio" name="gender" id="male" value="Male"
-	<% if(request.getParameter("gender")!=null && request.getParameter("gender").equals("Male") && isLoggedIn) { %>
+	<% if(isLoggedIn){ if(user.getGender()!=null && user.getGender().equals("Male")) { %>
 	 checked
-	<% } %>	
+	<% }} %>	
 	 required />
 	<label for="male">Male</label>
 	<br />
 	<input type="radio" name="gender" id="female" value="Female"
-	<% if(request.getParameter("gender")!=null && request.getParameter("gender").equals("Female") && isLoggedIn) { %>
+	<% if(isLoggedIn){ if(user.getGender()!=null && user.getGender().equals("Female")) { %>
 	 checked
-	<% } %>	
+	<% }} %>	
 	 required />
 	<label for="female">Female</label>
 </div>
@@ -161,28 +182,31 @@ boolean isLoggedIn =
 	<p>Known Languages :</p>
 	<input type="checkbox" name="languages" id="english" value="English" 
 	<%
-		if(request.getParameter("english")!=null){
+		if(isLoggedIn){
+		if(user.getKnownLanguages().contains("English")){
 	%>
 	checked
-	<% } %>
+	<% }} %>
 	/>
 	<label for="english">English</label>
 	<br />
 	<input type="checkbox" name="languages" id="hindi" value="Hindi" 
 	<%
-		if(request.getParameter("hindi")!=null){
+		if(isLoggedIn){
+		if(user.getKnownLanguages().contains("Hindi")){
 	%>
 	checked
-	<% } %>
+	<% }} %>
 	/>
 	<label for="hindi">Hindi</label>
 	<br />
 	<input type="checkbox" name="languages" id="gujarati" value="Gujarati" 
 	<%
-		if(request.getParameter("gujarati")!=null){
+		if(isLoggedIn){
+		if(user.getKnownLanguages().contains("Gujarati")){
 	%>
 	checked
-	<% } %>
+	<% }} %>
 	/>
 	<label for="gujarati">Gujarati</label>
 </div>
@@ -207,5 +231,63 @@ boolean isLoggedIn =
 			item.slideUp(400);
 	    });
 	});
+</script>
+
+<script>
+var addressList = ${addressListAsJSON};
+
+$(document).ready(function () {
+	var registrationForm = $('#registerForm');
+    var addressesListContainer = registrationForm.find('[data-repeater-list="items"]');
+
+    let myIndex = 0;
+    addressList.forEach(function (address, newIndex) {
+        // Clone the first item in the repeater and set unique data attributes
+        var addressTemplate = addressesListContainer.find('[data-repeater-item]:first').clone();
+
+       	// Update the name attributes to be unique
+       	addressTemplate.find('[name="items[0][addressId]"]').attr('name', 'items[' + newIndex + '][addressId]');
+        addressTemplate.find('[name="items[0][addressLine1]"]').attr('name', 'items[' + newIndex + '][addressLine1]');
+        addressTemplate.find('[name="items[0][addressLine2]"]').attr('name', 'items[' + newIndex + '][addressLine2]');
+        addressTemplate.find('[name="items[0][country]"]').attr('name', 'items[' + newIndex + '][country]');
+        addressTemplate.find('[name="items[0][state]"]').attr('name', 'items[' + newIndex + '][state]');
+        addressTemplate.find('[name="items[0][city]"]').attr('name', 'items[' + newIndex + '][city]');
+        addressTemplate.find('[name="items[0][pincode]"]').attr('name', 'items[' + newIndex + '][pincode]');
+
+        // Set the values in the cloned template
+        addressTemplate.find('[name="items[' + newIndex + '][addressId]"]').val(address.id);
+        addressTemplate.find('[name="items[' + newIndex + '][addressLine1]"]').val(address.addressLine1);
+        addressTemplate.find('[name="items[' + newIndex + '][addressLine2]"]').val(address.addressLine2);
+        addressTemplate.find('[name="items[' + newIndex + '][country]"]').append('<option selected value="'+address.country.id+'">'+address.country.name+'</option>');
+        addressTemplate.find('[name="items[' + newIndex + '][state]"]').append('<option selected value="'+address.state.id+'">'+address.state.name+'</option>');
+        addressTemplate.find('[name="items[' + newIndex + '][city]"]').append('<option selected value="'+address.city.id+'">'+address.city.name+'</option>');
+        addressTemplate.find('[name="items[' + newIndex + '][pincode]"]').val(address.pincode);
+        // Continue with other fields as needed
+
+        // Append the populated template to the repeater container
+        addressesListContainer.append(addressTemplate);
+
+        newIndex++; // Increment the index for the next item
+        myIndex++;
+    });
+    
+	setTimeout(function(){populateCountryDropdown(0);},100);
+
+    setTimeout(function(){
+    	for(let i=0;i<myIndex;i++){
+    		setCountryValues(i);
+    	}
+    },500);
+    setTimeout(function(){
+    	for(let i=0;i<myIndex;i++){
+    		setStateValues($("select#country_" + i).val(),i);
+    	}
+    },510);
+    setTimeout(function(){
+    	for(let i=0;i<myIndex;i++){
+    		setCityValues($("select#state_" + i).val(),i);
+    	}
+    },600);
+});
 </script>
 <% } %>

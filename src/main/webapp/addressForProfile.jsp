@@ -9,7 +9,7 @@
 %>
 <div class="form-group">
   <label>Address :</label>
-  <div style="padding: 2%; border: 2px solid #babecc; border-radius: 25px">
+  <div style="padding: 2%; border: 2px solid #babecc; border-radius: 25px" >
     <div class="d-flex justify-content-around">
       <div class="w-100 p-2">
       	<input type="hidden" name="savedAddressId_<%=n %>" value="<%=address.getId() %>" />
@@ -71,7 +71,7 @@
 </div>
 <% n++; }%> 
 
-<script>
+<%-- <script>
 	<%for(int a=n-1;a>0;a--){%>
 	populateSavedCountryDropdown(<%=a%>);
 	<%}%>
@@ -91,6 +91,6 @@
 	setTimeout(function(){populateSavedCityDropdown(<%=a%>,$("select#savedState_" + <%=a%>).val())},100);
 	<%}%>
 	});
-</script>
+</script> --%>
 	
 <% } %>

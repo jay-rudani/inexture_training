@@ -8,6 +8,7 @@
 	<title>Login</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
@@ -57,5 +58,10 @@
     <script src="js/jquery-3.7.0.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
+	    function preventBack() { window.history.forward(); }  
+	    setTimeout("preventBack()", 0);  
+	    window.onunload = function () { null };
+    </script>
 </body>
 </html>

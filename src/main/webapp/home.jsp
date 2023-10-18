@@ -15,7 +15,6 @@ if (session.getAttribute("isLoggedIn") == null || session.getAttribute("isLogged
     <link rel="stylesheet" href="css/all.min.css" />
     <link rel="stylesheet" href="css/profile.css" />
     <link rel="stylesheet" href="css/navbar.css" />
-    
 </head>
 <body>
 	<jsp:include page="navbar.jsp" />

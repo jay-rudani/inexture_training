@@ -14,7 +14,6 @@ $(document).ready(function() {
 	});
 
 	populateCountryDropdown(0);
-	//populateCountryDropdown(1);
 });
 
 function countryFn(id) {
@@ -24,18 +23,6 @@ function countryFn(id) {
 	let cityId = "city_" + index;
 	if (selectedCountryId != "") {
 		populateStateDropdown(index, selectedCountryId);
-	} else {
-		$("#" + stateId).empty();
-		$("#" + cityId).empty();
-	}
-}
-function savedCountryFn(id) {
-	let index = id.split("_")[1];
-	let selectedCountryId = $("#" + id).val();
-	let stateId = "savedState_" + index;
-	let cityId = "savedCity_" + index;
-	if (selectedCountryId != "") {
-		populateSavedStateDropdown(index, selectedCountryId);
 	} else {
 		$("#" + stateId).empty();
 		$("#" + cityId).empty();
@@ -51,42 +38,22 @@ function stateFn(id) {
 		$("#" + cityId).empty();
 	}
 }
-function savedStateFn(id) {
-	let index = id.split("_")[1];
-	let selectedStateId = $("#" + id).val();
-	let cityId = "savedCity_" + index;
-	if (selectedStateId != "") {
-		populateSavedCityDropdown(index, selectedStateId);
-	} else {
-		$("#" + cityId).empty();
-	}
-}
+let countriesList = "";
 function populateCountryDropdown(newCountryIndex) {
 	let countryDropdown = $("#country_" + newCountryIndex);
+	//let selectedVal = $("select#country_" + newCountryIndex).val();
 	countryDropdown.empty();
 	countryDropdown.append('<option selected disabled>Select Country</option>');
 
 	$.get("CountryServlet", function(countries) {
+		countriesList = countries;
+		//console.log("CountryList set")
 		countries.forEach(function(country) {
 			countryDropdown.append('<option value="' + country.id + '">' + country.name + '</option>');
 		});
+		//$("select#country_" + newCountryIndex).val(selectedVal);
 	});
 }
-function populateSavedCountryDropdown(newCountryIndex) {
-	let countryDropdown = $("#savedCountry_" + newCountryIndex);
-	let selectedVal = $("select#savedCountry_" + newCountryIndex).val();
-	countryDropdown.empty();
-	countryDropdown.append('<option selected disabled>Select Country</option>');
-
-	$.get("CountryServlet", function(countries) {
-		countries.forEach(function(country) {
-			countryDropdown.append('<option value="' + country.id + '">' + country.name + '</option>')
-		});
-
-		$("select#savedCountry_" + newCountryIndex).val(selectedVal);
-	});
-}
-
 function populateStateDropdown(stateId, countryId) {
 	let stateDropdown = $('select[id="state_' + stateId + '"]');
 	stateDropdown.empty();
@@ -96,20 +63,6 @@ function populateStateDropdown(stateId, countryId) {
 		states.forEach(function(state) {
 			stateDropdown.append('<option value="' + state.id + '">' + state.name + '</option>')
 		});
-	});
-}
-function populateSavedStateDropdown(stateId, countryId) {
-	let stateDropdown = $('select[id="savedState_' + stateId + '"]');
-	let selectedVal = $("select#savedState_" + stateId).val();
-	stateDropdown.empty();
-	stateDropdown.append('<option selected disabled>Select State</option>');
-
-	$.get("StateServlet?countryId=" + countryId, function(states) {
-		states.forEach(function(state) {
-			stateDropdown.append('<option value="' + state.id + '">' + state.name + '</option>')
-		});
-
-		$("select#savedState_" + stateId).val(selectedVal);
 	});
 }
 function populateCityDropdown(cityId, stateId) {
@@ -123,17 +76,45 @@ function populateCityDropdown(cityId, stateId) {
 		});
 	});
 }
-function populateSavedCityDropdown(cityId, stateId) {
-	let cityDropdown = $('select[id="savedCity_' + cityId + '"]');
-	let selectedVal = $("select#savedCity_" + cityId).val();
-	cityDropdown.empty();
+function setCountryValues(newCountryIndex) {
+	/*console.log("newCountryIndex ",newCountryIndex)*/
+	let countryDropdown = $("#country_" + newCountryIndex);
+	/*console.log(countryDropdown)*/
+	let selectedVal = $("select#country_" + newCountryIndex).val();
+	/*console.log(" newIndex "+newCountryIndex+" selectedVal "+selectedVal);*/
+	//countryDropdown.empty();
+	countryDropdown.append('<option selected disabled>Select Country</option>');
+	/*console.log("countriesList ",countriesList);*/
+	for (i in countriesList) {
+		//console.log(countriesList[i].name);
+		countryDropdown.append('<option value="' + countriesList[i].id + '">' + countriesList[i].name + '</option>');
+	}
+	$("select#country_" + newCountryIndex).val(selectedVal);
+}
+function setStateValues(newCountryIndex, newStateIndex) {
+	let stateDropdown = $('select[id="state_' + newStateIndex + '"]');
+	let selectedVal = $("select#state_" + newStateIndex).val();
+	/*stateDropdown.empty();*/
+	stateDropdown.append('<option selected disabled>Select State</option>');
+
+	$.get("StateServlet?countryId=" + newCountryIndex, function(states) {
+		states.forEach(function(state) {
+			stateDropdown.append('<option value="' + state.id + '">' + state.name + '</option>')
+		});
+
+		$("select#state_" + newStateIndex).val(selectedVal);
+	});
+}
+function setCityValues(newStateIndex, newCityIndex) {
+	let cityDropdown = $('select[id="city_' + newCityIndex + '"]');
+	let selectedVal = $("select#city_" + newCityIndex).val();
 	cityDropdown.append('<option selected disabled>Select City</option>');
 
-	$.get("CityServlet?stateId=" + stateId, function(cities) {
+	$.get("CityServlet?stateId=" + newStateIndex, function(cities) {
 		cities.forEach(function(city) {
 			cityDropdown.append('<option value="' + city.id + '">' + city.name + '</option>')
 		});
 
-		$("select#savedCity_" + cityId).val(selectedVal);
+		$("select#city_" + newCityIndex).val(selectedVal);
 	});
 }

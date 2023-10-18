@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,23 +23,19 @@ import utility.City;
 import utility.Country;
 import utility.State;
 
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/GetUserDetailsServlet")
+public class GetUserDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public static boolean isAuthenticated(HttpServletRequest request, HttpServletResponse response,
-			String emailOrUsername, String password) {
+	public static User getUserDetails(int user_id) {
 		Connection connection = DatabaseConnection.getConnection();
-		String query = "SELECT * FROM users WHERE (user_email = ? OR username = ?) AND user_password = ?";
+		String query = "SELECT * FROM users WHERE user_id = ?";
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, emailOrUsername);
-			statement.setString(2, emailOrUsername);
-			statement.setString(3, password);
+			statement.setInt(1, user_id);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 
-				int user_id = resultSet.getInt("user_id");
 				String user_uuid = resultSet.getString("user_uuid");
 				String firstName = resultSet.getString("user_first_name");
 				String lastName = resultSet.getString("user_last_name");
@@ -57,23 +52,14 @@ public class LoginServlet extends HttpServlet {
 				User user = new User(user_id, user_uuid, firstName, lastName, birthDate, userName, email,
 						knownLanguages, gender, profile_pic, user_role, getAddresses(user_uuid));
 
-				if (user_role.equals("ADMIN"))
-					request.getSession().setAttribute("isADMIN", true);
-				else
-					request.getSession().setAttribute("isADMIN", false);
-
-				request.getSession().setAttribute("user_id", resultSet.getInt("user_id"));
-				request.getSession().setAttribute("isLoggedIn", true);
-				request.getSession().setAttribute("userData", user);
-//				request.getSession().setAttribute("userAddresses", getAddresses(user_uuid));
-				return true;
+				return user;
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return false;
+		return null;
 	}
 
 	public static List<Address> getAddresses(String user_uuid) {
@@ -153,18 +139,14 @@ public class LoginServlet extends HttpServlet {
 		return null;
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		String emailOrUsername = request.getParameter("emailOrUsername");
-		String password = request.getParameter("password");
-
-		if (isAuthenticated(request, response, emailOrUsername, password)) {
-			response.sendRedirect("home.jsp");
-		} else {
-			out.println("<script src='js/loginFail.js'></script>");
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
+		if (getUserDetails(user_id) != null) {
+			request.getSession().setAttribute("manageUserData", getUserDetails(user_id));
+			response.sendRedirect("register.jsp");
 		}
 	}
 }

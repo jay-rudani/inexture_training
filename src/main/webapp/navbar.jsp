@@ -15,7 +15,7 @@
 	    		&& request.getSession().getAttribute("isADMIN").equals(true)){
 	    	%>
 	    	<li class="nav-item">
-        		<a class="nav-link" href="ViewUsersServlet">View Users</a>
+        		<a class="nav-link" href="viewUsers.jsp">View Users</a>
       		</li>
       		<%
 	    		}
