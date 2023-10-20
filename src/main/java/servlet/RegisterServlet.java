@@ -73,9 +73,12 @@ public class RegisterServlet extends HttpServlet {
 		int row = UserAddressDAO.addRecord(uuid, first_name, last_name, email, username, password,
 				java.sql.Date.valueOf(birth_date), gender, languages, inputStream, addresses);
 
-		if (row > 0)
-			out.println("<script>alert('Registered!');</script>");
-		else
-			out.println("<script>alert('Email, Username, UUID already existed');</script>");
+		if (row > 0) {
+			if (request.getSession().getAttribute("isLoggedIn") == null)
+				out.println("<script src='js/RegisterSuccess.js'></script>");
+		} else {
+			if (request.getSession().getAttribute("isLoggedIn") == null)
+				out.println("<script src='js/RegisterFail.js'></script>");
+		}
 	}
 }

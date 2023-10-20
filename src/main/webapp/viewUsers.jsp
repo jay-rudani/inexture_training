@@ -22,6 +22,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
+          	<div class="form-group">
+          		<input type="text" id="searchField" onkeyup="searchFunction()" name="searchField" placeholder="Search By Email..." class="form-control" />
+          	</div>
             <table class="table table-responsive">
               <thead>
                 <tr>
@@ -34,14 +37,6 @@
                 </tr>
               </thead>
               <tbody id="usersTableBody">
-              	<tr>
-              		<td></td>
-              		<td></td>
-              		<td></td>
-              		<td></td>
-              		<td></td>
-              		<td></td>
-              	</tr>
               </tbody>
             </table>
             <script>
@@ -50,7 +45,7 @@
 					users.forEach(function(user) {
 						var userForm = '';
 						userForm+='<tr>'
-						userForm+='<td><input type="text" class="form-control" value="'+user.email+'" /></td>';
+						userForm+='<td><input type="text" id="email" class="form-control" value="'+user.email+'" /></td>';
 						userForm+='<td><input type="text" class="form-control" value="'+user.userName+'" /></td>';
 						userForm+='<td><input type="text" class="form-control" value="'+user.birthDate+'" /></td>';
 						userForm+='<td><button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#addressModalCenter'+user.id+'" >View Addresses</button></td>';
@@ -91,18 +86,35 @@
 					    addressModal+='</div>';
 					    addressModal+='</div>';
 					    addressModal+='</div>';
-						
+					    
 						$("#usersTableBody").append(userForm);
 						$("table").append(addressModal);
 					});
 				});
-				
 			});
 			function deleteUser(id){
 				console.log(id);
 				$.get("DeleteUserServlet?user_id=" + id,function(){
 					window.location.href="viewUsers.jsp";
 				});
+			}
+			function searchFunction(){
+				var searchField, filter, tbody, tr, td, input, i, j, txtValue;
+				searchField = document.getElementById("searchField");
+				filter = searchField.value.toUpperCase();
+				tbody = document.getElementById("usersTableBody");
+			    tr = tbody.getElementsByTagName("tr");
+			    for(i = 0; i < tr.length; i++){
+			    	td = tr[i].getElementsByTagName("td");
+		    		input = td[0].getElementsByTagName("input")[0];
+		    		txtValue = input.value;
+		    		console.log(txtValue);
+		    		if(txtValue.toUpperCase().indexOf(filter) > -1){
+		    			tr[i].style.display = "";
+		    		}else{
+		    			tr[i].style.display = "none";
+		    		}
+			    }
 			}
 	  </script>
           </div>
