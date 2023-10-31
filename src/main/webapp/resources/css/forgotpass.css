@@ -1,0 +1,47 @@
+body {
+  background-color: #ebecf0;
+}
+.header {
+  text-align: center;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set the container height to the viewport height for vertical centering */
+}
+.container > * {
+  width: 100%;
+}
+.form-div {
+  padding: 2%;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px #babecc, -5px -5px 10px #fff;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.getOTPBtn {
+  background-color: transparent;
+  border-radius: 25px;
+  border: 1px solid transparent;
+  color: black;
+  box-shadow: inset 3px 3px 5px #babecc, inset -5px -5px 10px #fff;
+}
+.getOTPBtn:hover {
+  cursor: pointer;
+  box-shadow: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: gray;
+  box-shadow: 3px 3px 5px #babecc, -5px -5px 10px #fff;
+}
+.form-control {
+  background-color: transparent;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px #babecc, -5px -5px 10px #fff;
+}
+.form-control:focus {
+  background-color: transparent;
+  border: none;
+  box-shadow: inset 3px 3px 5px #babecc, inset -5px -5px 10px #fff;
+}

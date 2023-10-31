@@ -1,0 +1,22 @@
+body {
+  background-color: #ebecf0;
+}
+.mainSection {
+  margin: 2%;
+}
+.form-div {
+  padding: 2%;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px #babecc, -5px -5px 10px #fff;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.form-control {
+  background-color: transparent;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px #babecc, -5px -5px 10px #fff;
+}
+.form-control:focus {
+  background-color: transparent;
+  border: none;
+  box-shadow: inset 3px 3px 5px #babecc, inset -5px -5px 10px #fff;
+}
