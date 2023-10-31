@@ -8,29 +8,34 @@
     <link rel="stylesheet" href="<c:url value='/resources/css/style.css' />" />
   </head>
   <body>
+    <jsp:include page="navbar.jsp" />
     <section class="mainSection">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            ${param.convertedValue}
+            <c:if test="${param.from ne null && param.to ne null && param.result ne null}">
+                <input type="text" id="result" value="${param.from} -> ${param.to} = ${param.result}" class="form-control mb-2" readonly />
+            </c:if>
             <div class="form-div">
               <form action="/icc/convert" method="post">
                 <div class="form-group">
-                  <label for="convertedFrom">Converted From :</label>
+                  <label for="convertFrom">Converted From :</label>
                   <select
-                    id="convertedFrom"
-                    name="convertedFrom"
+                    id="convertFrom"
+                    name="convertFrom"
                     class="form-control"
+                    required
                   >
                     <option selected disabled>Select From</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="convertedTo">Converted To :</label>
+                  <label for="convertTo">Converted To :</label>
                   <select
-                    id="convertedTo"
-                    name="convertedTo"
+                    id="convertTo"
+                    name="convertTo"
                     class="form-control"
+                    required
                   >
                     <option selected disabled>Select To</option>
                   </select>
@@ -42,6 +47,7 @@
                     class="form-control"
                     name="amount"
                     id="amount"
+                    required
                   />
                 </div>
                 <input type="submit" class="btn btn-primary" value="Convert" />

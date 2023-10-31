@@ -1,7 +1,7 @@
 $(function(){
 
-    var fromDropdown = $("#convertedFrom");
-    var toDropdown = $("#convertedTo");
+    var fromDropdown = $("#convertFrom");
+    var toDropdown = $("#convertTo");
     var app_id = "4727824e7fbe4acc89d481bd661c08d1";
 
     $.get("https://openexchangerates.org/api/latest.json?app_id="+app_id+"",
@@ -13,8 +13,8 @@ $(function(){
             for(var exchangeRate in exchangeRates){
                 var rate = exchangeRates[exchangeRate];
                 var name = fullNames[exchangeRate];
-                fromDropdown.append($("<option></option>").attr("value", rate).text(name));
-                toDropdown.append($("<option></option>").attr("value", rate).text(name));
+                fromDropdown.append($("<option></option>").attr("value", name+"_"+exchangeRate+"_"+rate).text(name + " (" + exchangeRate + ")"));
+                toDropdown.append($("<option></option>").attr("value", name+"_"+exchangeRate+"_"+rate).text(name + " (" + exchangeRate + ")"));
             }
 
         });
