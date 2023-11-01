@@ -1,14 +1,16 @@
 package org.icc.service.impl;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.icc.factory.FactoryProvider;
 import org.icc.model.ConversionHistory;
 import org.icc.service.ConversionService;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ConversionServiceImpl implements ConversionService {
@@ -16,7 +18,6 @@ public class ConversionServiceImpl implements ConversionService {
     @Override
     public double convert(String convertFrom, String convertTo, double amount) {
         double convertedValue = 0;
-        SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 
         String[] convertFromData = convertFrom.split("_");
         String convertFromFullName = convertFromData[0];
@@ -32,7 +33,7 @@ public class ConversionServiceImpl implements ConversionService {
 
         convertedValue = rate * amount;
 
-        Session session = factory.openSession();
+        Session session = FactoryProvider.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         ConversionHistory conversionHistory = new ConversionHistory();
         conversionHistory.setSourceCurrency(convertFromFullName + " (" + convertFromCountryCode + ")");
@@ -46,8 +47,16 @@ public class ConversionServiceImpl implements ConversionService {
 
         tx.commit();
         session.close();
-        factory.close();
 
         return convertedValue;
+    }
+
+    @Override
+    public List<ConversionHistory> getHistory() {
+        Session session = FactoryProvider.getSessionFactory().openSession();
+        Query query = session.createQuery("From ConversionHistory");
+        List<ConversionHistory> histories = query.getResultList();
+        session.close();
+        return histories;
     }
 }
