@@ -1,46 +1,53 @@
 package org.icc.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.icc.factory.FactoryProvider;
 import org.icc.model.ConversionHistory;
+import org.icc.model.ConversionResult;
 import org.icc.service.ConversionService;
+import org.icc.utility.ConvertFromToName;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class ConversionServiceImpl implements ConversionService {
 
+    private static final String apiKey = "1d18149ae8a2140ef318dbc2";
+
+    @Autowired
+    private RestTemplate restTemplate;
+
     @Override
-    public double convert(String convertFrom, String convertTo, double amount) {
-        double convertedValue = 0;
+    public ConversionHistory convert(String convertFrom, String convertTo, double amount) throws JsonProcessingException {
 
-        String[] convertFromData = convertFrom.split("_");
-        String convertFromFullName = convertFromData[0];
-        String convertFromCountryCode = convertFromData[1];
-        double convertFromRate = 1 / Double.parseDouble(convertFromData[2]);
+        String conversionUrl = "https://v6.exchangerate-api.com/v6/" + apiKey + "/pair/" + convertFrom + "/" + convertTo + "/" + amount;
+        String supportedCodesUrl = "https://v6.exchangerate-api.com/v6/" + apiKey + "/codes";
+        String json = restTemplate.getForObject(conversionUrl, String.class);
 
-        String[] convertToData = convertTo.split("_");
-        String convertToFullName = convertToData[0];
-        String convertToCountryCode = convertToData[1];
-        double convertToRate = 1 / Double.parseDouble(convertToData[2]);
+        ObjectMapper mapper = new ObjectMapper();
+        ConversionResult conversionResult = mapper.readValue(json, ConversionResult.class);
 
-        double rate = convertFromRate / convertToRate;
-
-        convertedValue = rate * amount;
+        ResponseEntity<String> response = restTemplate.getForEntity(supportedCodesUrl, String.class);
+        String convertFromName = ConvertFromToName.getName(response, convertFrom);
+        String convertToName = ConvertFromToName.getName(response, convertTo);
 
         Session session = FactoryProvider.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         ConversionHistory conversionHistory = new ConversionHistory();
-        conversionHistory.setSourceCurrency(convertFromFullName + " (" + convertFromCountryCode + ")");
-        conversionHistory.setTargetCurrency(convertToFullName + " (" + convertToCountryCode + ")");
+        conversionHistory.setSourceCurrency(convertFromName + " (" + convertFrom + ")");
+        conversionHistory.setTargetCurrency(convertToName + " (" + convertTo + ")");
         conversionHistory.setAmount(amount);
-        conversionHistory.setConvertedAmount(convertedValue);
-        conversionHistory.setExchangeRate(rate);
+        conversionHistory.setConvertedAmount(conversionResult.getConversion_result());
+        conversionHistory.setExchangeRate(conversionResult.getConversion_rate());
         conversionHistory.setConvertedAt(new Date());
 
         session.persist(conversionHistory);
@@ -48,7 +55,7 @@ public class ConversionServiceImpl implements ConversionService {
         tx.commit();
         session.close();
 
-        return convertedValue;
+        return conversionHistory;
     }
 
     @Override

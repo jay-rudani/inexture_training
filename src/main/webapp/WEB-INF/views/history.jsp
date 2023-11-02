@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,16 +15,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <table id="historyTable" class="table table-stripped table-responsive table-bordered">
+                    <table id="historyTable" class="table table-striped table-bordered" style="width:100%">
                         <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
-                                <th>Source Currency</th>
-                                <th>Target Currency</th>
-                                <th>Amount</th>
-                                <th>Exchange Rate</th>
-                                <th>Converted Amount</th>
-                                <th>Converted At</th>
+                                <th><spring:message code="table.source.currency" text="Source Currency" /></th>
+                                <th><spring:message code="table.target.currency" text="Target Currency" /></th>
+                                <th><spring:message code="table.amount" text="Amount" /></th>
+                                <th><spring:message code="table.exchange.rate" text="Exchange Rate" /></th>
+                                <th><spring:message code="table.converted.amount" text="Converted Amount" /></th>
+                                <th><spring:message code="table.converted.at" text="Converted At" /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,5 +49,18 @@
         <script src="<c:url value='/resources/js/jquery-3.7.0.min.js' />"></script>
         <script src="<c:url value='/resources/js/popper.min.js' />"></script>
         <script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+        <script>
+            $(function(){
+                new DataTable('#historyTable', {
+                    pageLength: 5,
+                    search: {
+                        return: true
+                    },
+                    lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']]
+                });
+            });
+        </script>
     </body>
 </html>

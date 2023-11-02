@@ -1,12 +1,13 @@
 package org.icc.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.icc.model.ConversionHistory;
 
 import java.util.List;
 
 public interface ConversionService {
 
-    public double convert(String convertedFrom, String convertedTo, double amount);
+    ConversionHistory convert(String convertedFrom, String convertedTo, double amount) throws JsonProcessingException;
 
-    public List<ConversionHistory> getHistory();
+    List<ConversionHistory> getHistory();
 }
