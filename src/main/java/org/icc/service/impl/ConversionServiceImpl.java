@@ -58,12 +58,56 @@ public class ConversionServiceImpl implements ConversionService {
         return conversionHistory;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public List<ConversionHistory> getHistory() {
+    public List<ConversionHistory> getConversionHistory(String keyword, Integer start, Integer entries) {
         Session session = FactoryProvider.getSessionFactory().openSession();
-        Query query = session.createQuery("From ConversionHistory");
-        List<ConversionHistory> histories = query.getResultList();
+        Query query;
+        List<ConversionHistory> conversionHistories;
+        String hqlQuery;
+
+        if (keyword != null && !keyword.isEmpty()) {
+            hqlQuery = "From ConversionHistory Where " +
+                    "sourceCurrency Like '%" + keyword + "%' or " +
+                    "targetCurrency Like '%" + keyword + "%' or " +
+                    "amount Like '%" + keyword + "%' or " +
+                    "exchangeRate Like '%" + keyword + "%' or " +
+                    "convertedAmount Like '%" + keyword + "%' or " +
+                    "convertedAt Like '%" + keyword + "%' Order By id DESC";
+        } else {
+            hqlQuery = "From ConversionHistory Order By id DESC";
+        }
+
+        query = session.createQuery(hqlQuery);
+        query.setFirstResult(start);
+        query.setMaxResults(entries);
+        conversionHistories = query.getResultList();
         session.close();
-        return histories;
+        return conversionHistories;
+    }
+
+    @Override
+    public long getCount(String keyword) {
+        Session session = FactoryProvider.getSessionFactory().openSession();
+        Query query;
+        int size;
+        String hqlQuery;
+
+        if (keyword != null && !keyword.isEmpty()) {
+            hqlQuery = "From ConversionHistory Where " +
+                    "sourceCurrency Like '%" + keyword + "%' or " +
+                    "targetCurrency Like '%" + keyword + "%' or " +
+                    "amount Like '%" + keyword + "%' or " +
+                    "exchangeRate Like '%" + keyword + "%' or " +
+                    "convertedAmount Like '%" + keyword + "%' or " +
+                    "convertedAt Like '%" + keyword + "%'";
+        } else {
+            hqlQuery = "From ConversionHistory";
+        }
+
+        query = session.createQuery(hqlQuery);
+        size = query.getResultList().size();
+        session.close();
+        return size;
     }
 }

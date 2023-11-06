@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class HomeController {
 
@@ -40,8 +42,14 @@ public class HomeController {
     }
 
     @GetMapping("/history")
-    public String getHistory(Model model) {
-        model.addAttribute("histories", service.getHistory());
+    public String getConversionHistory(@RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") Integer start, @RequestParam(defaultValue = "2", name = "entries") Integer entries, Model model) {
+        List<ConversionHistory> histories = service.getConversionHistory(keyword, start * entries, entries);
+        model.addAttribute("histories", histories);
+        model.addAttribute("currentPage", start);
+        try {
+            model.addAttribute("totalPages", (service.getCount(keyword) + entries - 1) / entries);
+        } catch (ArithmeticException ignored) {
+        }
         return "history";
     }
 }

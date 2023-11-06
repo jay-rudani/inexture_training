@@ -9,5 +9,7 @@ public interface ConversionService {
 
     ConversionHistory convert(String convertedFrom, String convertedTo, double amount) throws JsonProcessingException;
 
-    List<ConversionHistory> getHistory();
+    List<ConversionHistory> getConversionHistory(String keyword, Integer start, Integer entries);
+
+    long getCount(String keyword);
 }
